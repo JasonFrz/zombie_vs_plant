@@ -7,12 +7,12 @@ public class Peashooter extends Plant {
     public Timer shootTimer;
 
 
-    public Peashooter(OnGame parent,int x,int y) {
+    public Peashooter(Game parent,int x,int y) {
         super(parent,x,y);
         shootTimer = new Timer(2000,(ActionEvent e) -> {
             //System.out.println("SHOOT");
-            if(gp.laneZombies.get(y).size() > 0) {
-                gp.lanePeas.get(y).add(new Pea(gp, y, 103 + this.x * 100));
+            if(game.laneZombies.get(y).size() > 0) {
+                game.lanePeas.get(y).add(new Pea(game, y, 103 + this.x * 100));
             }
         });
         shootTimer.start();

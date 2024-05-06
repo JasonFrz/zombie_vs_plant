@@ -1,7 +1,7 @@
 
 public class NormalZombie extends Zombie {
 
-    public NormalZombie(OnGame parent,int lane){
+    public NormalZombie(Game parent,int lane){
         super(parent,lane);
     }
 

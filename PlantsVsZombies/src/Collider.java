@@ -7,11 +7,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 
-public class Utama extends JPanel implements MouseListener {
+public class Collider extends JPanel implements MouseListener {
 
     ActionListener al;
 
-    public Utama(){
+    public Collider(){
         //setBorder(new LineBorder(Color.RED));
         setOpaque(false);
         addMouseListener(this);

@@ -9,13 +9,13 @@ import javax.swing.*;
  */
 
 
-public class Menu extends JPanel {
+public class MainMenu extends JPanel {
 
     /**
      * Creates new form Menu
      */
     Image bgImage;
-    public Menu() {
+    public MainMenu() {
         initComponents();
         setSize(1012, 785);
         bgImage  = new ImageIcon(this.getClass().getResource("images/menu.jpg")).getImage();
@@ -78,7 +78,7 @@ public class Menu extends JPanel {
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
         // TODO add your handling code here:
-        GameWindow.begin();
+        PlantVsZombie.begin();
     }//GEN-LAST:event_jPanel1MouseClicked
 
 

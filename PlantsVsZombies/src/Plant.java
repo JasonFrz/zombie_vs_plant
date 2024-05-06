@@ -6,13 +6,13 @@ public abstract class Plant {
     public int x;
     public int y;
 
-    public OnGame gp;
+    public Game game;
 
 
-    public Plant(OnGame parent,int x,int y){
+    public Plant(Game parent,int x,int y){
         this.x = x;
         this.y = y;
-        gp = parent;
+        game = parent;
     }
 
     public void stop(){}

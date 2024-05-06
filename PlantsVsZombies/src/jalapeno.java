@@ -1,7 +1,7 @@
-public class jalapeno extends Plant {
+public class Jalapeno extends Plant {
     
-    public jalapeno(OnGame parent, int x, int y) {
-	super(parent, x, y);
+    public Jalapeno(Game parent, int x, int y) {
+	    super(parent, x, y);
     }
     
 }

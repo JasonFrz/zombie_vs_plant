@@ -6,7 +6,7 @@ import java.awt.event.MouseListener;
 
 public class Sun extends JPanel implements MouseListener {
 
-    OnGame gamePlay;
+    Game gamePlay;
     Image sunImage;
 
     int myX;
@@ -15,7 +15,7 @@ public class Sun extends JPanel implements MouseListener {
 
     int hancur = 200;
 
-    public Sun(OnGame parent,int startX,int startY,int endY){
+    public Sun(Game parent,int startX,int startY,int endY){
         this.gamePlay = parent;
         this.endY = endY;
         setSize(80,80);

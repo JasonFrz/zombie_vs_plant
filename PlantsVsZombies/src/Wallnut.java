@@ -15,13 +15,8 @@ import javax.swing.Timer;
 public class Wallnut extends Plant{
 
     private int x;
-     public Wallnut(OnGame parent,int x,int y) {
+     public Wallnut(Game parent,int x,int y) {
         super(parent,x,y);
-        int Hpwall = 1000; {
-            // if(gp.laneZombies.get(y).size() > 0) {
-            //     gp.lanePeas.get(y).add(new Pea(gp, y, 103 + this.x * 100));
-            // }
-        };
-        
+        int Hpwall = 2000;
     }
 }

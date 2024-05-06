@@ -2,11 +2,11 @@
 import java.io.*;
 import java.util.logging.Logger;
 
-public class LevelData {
+public class DataLevel {
    static String Lvl = "1";
-   static String [][] Level = {{"NormalZombie"}, {"NormalZombie","ConeHeadZombie"}, {"NormalZombie","ConeHeadZombie", "FootballZombie"}, {"NormalZombie","ConeHeadZombie", "FootballZombie", "gargantuar"}};
-   static int [][][] LevelValue = {{{0,99}},{{0,49},{50,99}}, {{0,33},{34,66},{67,99}}, {{0,25},{26,50},{51,75},{76,99}}}; ;
-   public LevelData() {
+   static String [][] jenisZombie = {{"NormalZombie"}, {"NormalZombie","ConeHeadZombie"}, {"NormalZombie","ConeHeadZombie", "FootballZombie"}, {"NormalZombie","ConeHeadZombie", "FootballZombie", "gargantuar"}};
+   static int [][][] Persentase = {{{0,99}},{{0,49},{50,99}}, {{0,33},{34,66},{67,99}}, {{0,25},{26,50},{51,75},{76,99}}}; ;
+   public DataLevel() {
        try {
            File file = new File("Level.vbhv");
            
@@ -32,7 +32,7 @@ public class LevelData {
             bwr.close();
             Lvl = lvl;
         } catch (IOException ex) {
-            Logger.getLogger(LevelData.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(DataLevel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
                
    }

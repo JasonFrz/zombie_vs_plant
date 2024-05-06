@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 
-public class GameWindow extends JFrame {
+public class PlantVsZombie extends JFrame {
 
     enum PlantType{
         None,
@@ -18,7 +18,7 @@ public class GameWindow extends JFrame {
 
     //PlantType activePlantingBrush = PlantType.None;
     
-    public GameWindow(){
+    public PlantVsZombie(){
         setSize(1012,785);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLayout(null);
@@ -27,7 +27,7 @@ public class GameWindow extends JFrame {
         sun.setLocation(37,80);
         sun.setSize(60,20);
 
-        OnGame onGame = new OnGame(sun);
+        Game onGame = new Game(sun);
         onGame.setLocation(0,0);
         getLayeredPane().add(onGame,new Integer(0));
         
@@ -84,8 +84,8 @@ public class GameWindow extends JFrame {
         setResizable(false);
         setVisible(true);
     }
-    public GameWindow(boolean bool) {
-        Menu menu = new Menu();
+    public PlantVsZombie(boolean bool) {
+        MainMenu menu = new MainMenu();
         menu.setLocation(0,0);
         setSize(1012,785);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -95,14 +95,14 @@ public class GameWindow extends JFrame {
         setVisible(true);
         setLocationRelativeTo(null);
     }
-    static GameWindow gameMenu;
+    static PlantVsZombie gameMenu;
     public static void begin() {
         gameMenu.dispose();
-        gameMenu = new GameWindow();
+        gameMenu = new PlantVsZombie();
         gameMenu.setLocationRelativeTo(null);
     }
     public static void main(String[] args) {
-        gameMenu = new GameWindow(true);   
+        gameMenu = new PlantVsZombie(true);   
     }
 
 }

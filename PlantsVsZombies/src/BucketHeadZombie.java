@@ -9,7 +9,7 @@
  * @author JASON
  */
 public class BucketHeadZombie extends Zombie {
-    public BucketHeadZombie(OnGame parent,int lane){
+    public BucketHeadZombie(Game parent,int lane){
         super(parent,lane);
         health = 2200;
     }
