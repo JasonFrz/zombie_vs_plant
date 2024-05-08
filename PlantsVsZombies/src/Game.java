@@ -21,6 +21,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
     Image freezePeaImage;
     Image wallnutImage;
     Image pea2Image;
+    Image repeaterImage;
 
     Image normalZombieImage;
     Image coneHeadZombieImage;
@@ -63,19 +64,20 @@ public class Game extends JLayeredPane implements MouseMotionListener {
 
         backgroundImg  = new ImageIcon(this.getClass().getResource("images/mainBG.png")).getImage();
 
-        peashooterImage = new ImageIcon(this.getClass().getResource("images/plants/peashooter.png")).getImage();
-        freezePeashooterImage = new ImageIcon(this.getClass().getResource("images/plants/freezepeashooter.png")).getImage();
+        peashooterImage = new ImageIcon(this.getClass().getResource("images/plants/Peashooter.png")).getImage();
+        freezePeashooterImage = new ImageIcon(this.getClass().getResource("images/plants/SnowPea.png")).getImage();
         sunflowerImage = new ImageIcon(this.getClass().getResource("images/plants/sunflower.gif")).getImage();
         peaImage = new ImageIcon(this.getClass().getResource("images/pea.png")).getImage();
         pea2Image = new ImageIcon(this.getClass().getResource("images/pea_2.png")).getImage();
         freezePeaImage = new ImageIcon(this.getClass().getResource("images/freezepea.png")).getImage();
         wallnutImage = new ImageIcon(this.getClass().getResource("images/plants/wallnut.png")).getImage();
+        repeaterImage = new ImageIcon(this.getClass().getResource("images/plants/repeater1.png")).getImage();
 
-        normalZombieImage = new ImageIcon(this.getClass().getResource("images/zombies/normalzombie.gif")).getImage();
-        coneHeadZombieImage = new ImageIcon(this.getClass().getResource("images/zombies/zombie2.png")).getImage();
-        bucketheadZombieImage = new ImageIcon(this.getClass().getResource("images/zombies/zombie3.png")).getImage();
-        footballZombieImage = new ImageIcon(this.getClass().getResource("images/zombies/zombie4.png")).getImage();
-        gargantuarZombieImage = new ImageIcon(this.getClass().getResource("images/zombies/zombie5.png")).getImage();
+        normalZombieImage = new ImageIcon(this.getClass().getResource("images/zombies/NormalZombie.png")).getImage();
+        coneHeadZombieImage = new ImageIcon(this.getClass().getResource("images/zombies/ConeheadZombie.png")).getImage();
+        bucketheadZombieImage = new ImageIcon(this.getClass().getResource("images/zombies/BuckheadZombie.png")).getImage();
+        footballZombieImage = new ImageIcon(this.getClass().getResource("images/zombies/FootballZombie.png")).getImage();
+        gargantuarZombieImage = new ImageIcon(this.getClass().getResource("images/zombies/Gargantuar.png")).getImage();
 
         laneZombies = new ArrayList<>();
         laneZombies.add(new ArrayList<>());
@@ -157,8 +159,6 @@ public class Game extends JLayeredPane implements MouseMotionListener {
         }
 
     }
-    //tes tes tes
-    //tesssss
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -171,16 +171,19 @@ public class Game extends JLayeredPane implements MouseMotionListener {
             if(c.assignedPlant != null){
                 Plant p = c.assignedPlant;
                 if(p instanceof Peashooter){
-                    g.drawImage(peashooterImage,60 + (i%9)*100,129 + (i/9)*120,null);
+                    g.drawImage(peashooterImage,45 + (i%9)*100,110 + (i/9)*120,null);
                 }
                 if(p instanceof FreezePeashooter){
-                    g.drawImage(freezePeashooterImage,60 + (i%9)*100,129 + (i/9)*120,null);
+                    g.drawImage(freezePeashooterImage,48 + (i%9)*100,129 + (i/9)*120,null);
                 }
                 if(p instanceof Sunflower){
                     g.drawImage(sunflowerImage,60 + (i%9)*100,129 + (i/9)*120,null);
                 }
                 if(p instanceof Wallnut){
-                    g.drawImage(wallnutImage,60 + (i%9)*100,120 + (i/9)*120,null);
+                    g.drawImage(wallnutImage,45 + (i%9)*100,110 + (i/9)*120,null);
+                }
+                if(p instanceof Repeater){
+                    g.drawImage(repeaterImage,65 + (i%9)*100,129 + (i/9)*120,null);
                 }
             }
         }
@@ -195,8 +198,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
                     g.drawImage(bucketheadZombieImage,z.posX,109+(i*120),null);
                 }else if(z instanceof FootballZombie){
                     g.drawImage(footballZombieImage,z.posX,109+(i*120),null);
-                }
-                else if(z instanceof Gargantuar){
+                }else if(z instanceof Gargantuar){
                     g.drawImage(gargantuarZombieImage,z.posX,109+(i*120),null);
                 }
             }
@@ -205,8 +207,10 @@ public class Game extends JLayeredPane implements MouseMotionListener {
                 Pea p = lanePeas.get(i).get(j);
                 if(p instanceof FreezePea){
                     g.drawImage(freezePeaImage, p.posX, 130 + (i * 120), null);
-                }else {
+                } else if (p instanceof Pea) {
                     g.drawImage(peaImage, p.posX, 130 + (i * 120), null);
+                } else {
+                    g.drawImage(pea2Image, p.posX, 130 + (i * 120), null);
                 }
             }
 
@@ -258,6 +262,13 @@ public class Game extends JLayeredPane implements MouseMotionListener {
                 if(getSunScore() >= 50) {
                     OnFirst[x + y * 9].setPlant(new Wallnut(Game.this, x, y));
                     setSunScore(getSunScore()-50);
+                }
+            }
+
+            if(activePlantingBrush == PlantVsZombie.PlantType.Repeater){
+                if(getSunScore() >= 200) {
+                    OnFirst[x + y * 9].setPlant(new Repeater(Game.this, x, y));
+                    setSunScore(getSunScore()-200);
                 }
             }
             activePlantingBrush = PlantVsZombie.PlantType.None;

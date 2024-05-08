@@ -20,7 +20,7 @@ public class DoublePea {
             Zombie z = game.laneZombies.get(myLane).get(i);
             Rectangle zRect = new Rectangle(z.posX,109 + myLane*120,400,120);
             if(pRect.intersects(zRect)){
-                z.health -= 600;
+                z.health -= 143;
                 boolean exit = false;
                 if(z.health < 0){
                     System.out.println("ZOMBIE DIE");

@@ -67,7 +67,7 @@ public class Zombie {
                                     break;
             case "FootballZombie" : z = new FootballZombie(parent,lane);
                                     break;
-                case "gargantuar" : z = new Gargantuar(parent,lane);
+            case "Gargantuar" : z = new Gargantuar(parent,lane);
                                     break;
         }
         return z;

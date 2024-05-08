@@ -10,9 +10,9 @@ public class PlantVsZombie extends JFrame {
         Peashooter,
         FreezePeashooter,
         Wallnut,
-        repeater,
-        jalapeno,
-        potatomine
+        Repeater,
+        Jalapeno,
+        PotatoMine
         
     }
 
@@ -62,21 +62,21 @@ public class PlantVsZombie extends JFrame {
         PlantCard repeater = new PlantCard(new ImageIcon(this.getClass().getResource("images/cards/card_repeater.png")).getImage());
         repeater.setLocation(370,8);
         repeater.setAction((ActionEvent e) -> {
-            onGame.activePlantingBrush = PlantType.repeater;
+            onGame.activePlantingBrush = PlantType.Repeater;
         });
         getLayeredPane().add(repeater,new Integer(3));
 
         PlantCard jalapeno = new PlantCard(new ImageIcon(this.getClass().getResource("images/cards/card_jalapeno.png")).getImage());
         jalapeno.setLocation(433,8);
         jalapeno.setAction((ActionEvent e) -> {
-            onGame.activePlantingBrush = PlantType.jalapeno;
+            onGame.activePlantingBrush = PlantType.Jalapeno;
         });
         getLayeredPane().add(jalapeno,new Integer(3));
 
         PlantCard potatomine = new PlantCard(new ImageIcon(this.getClass().getResource("images/cards/card_potatomine.png")).getImage());
         potatomine.setLocation(498,8);
         potatomine.setAction((ActionEvent e) -> {
-            onGame.activePlantingBrush = PlantType.potatomine;
+            onGame.activePlantingBrush = PlantType.PotatoMine;
         });
         getLayeredPane().add(potatomine,new Integer(3));
 
