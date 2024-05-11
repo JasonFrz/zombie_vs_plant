@@ -1,6 +1,9 @@
-public class Jalapeno extends Plant {
+import java.awt.event.ActionEvent;
+import javax.swing.Timer;
+
+public class jalapeno extends Plant {
     
-    public Jalapeno(Game parent, int x, int y) {
+    public jalapeno(Game parent, int x, int y) {
 	    super(parent, x, y);
         int Hpwall = 2000;
     }

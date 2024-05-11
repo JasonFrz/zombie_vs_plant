@@ -22,7 +22,6 @@ public class Game extends JLayeredPane implements MouseMotionListener {
     Image wallnutImage;
     Image pea2Image;
     Image repeaterImage;
-    Image jalapenoImage;
 
     Image normalZombieImage;
     Image coneHeadZombieImage;
@@ -73,7 +72,6 @@ public class Game extends JLayeredPane implements MouseMotionListener {
         freezePeaImage = new ImageIcon(this.getClass().getResource("images/freezepea.png")).getImage();
         wallnutImage = new ImageIcon(this.getClass().getResource("images/plants/wallnut.png")).getImage();
         repeaterImage = new ImageIcon(this.getClass().getResource("images/plants/repeater1.png")).getImage();
-        jalapenoImage = new ImageIcon(this.getClass().getResource("images/plants/Jalapeno1.png")).getImage();
 
         normalZombieImage = new ImageIcon(this.getClass().getResource("images/zombies/NormalZombie.png")).getImage();
         coneHeadZombieImage = new ImageIcon(this.getClass().getResource("images/zombies/ConeheadZombie.png")).getImage();
@@ -184,11 +182,8 @@ public class Game extends JLayeredPane implements MouseMotionListener {
                 if(p instanceof Wallnut){
                     g.drawImage(wallnutImage,45 + (i%9)*100,110 + (i/9)*120,null);
                 }
-                if(p instanceof Repeater){
+                if(p instanceof repeater){
                     g.drawImage(repeaterImage,65 + (i%9)*100,129 + (i/9)*120,null);
-                }
-                if(p instanceof Jalapeno){
-                    g.drawImage(jalapenoImage,65 + (i%9)*100,129 + (i/9)*120,null);
                 }
             }
         }
@@ -203,7 +198,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
                     g.drawImage(bucketheadZombieImage,z.posX,109+(i*120),null);
                 }else if(z instanceof FootballZombie){
                     g.drawImage(footballZombieImage,z.posX,109+(i*120),null);
-                }else if(z instanceof Gargantuar){
+                }else if(z instanceof gargantuar){
                     g.drawImage(gargantuarZombieImage,z.posX,109+(i*120),null);
                 }
             }
@@ -272,15 +267,8 @@ public class Game extends JLayeredPane implements MouseMotionListener {
 
             if(activePlantingBrush == PlantVsZombie.PlantType.Repeater){
                 if(getSunScore() >= 200) {
-                    OnFirst[x + y * 9].setPlant(new Repeater(Game.this, x, y));
+                    OnFirst[x + y * 9].setPlant(new repeater(Game.this, x, y));
                     setSunScore(getSunScore()-200);
-                }
-            }
-
-            if(activePlantingBrush == PlantVsZombie.PlantType.Jalapeno){
-                if(getSunScore() >= 150) {
-                    OnFirst[x + y * 9].setPlant(new Jalapeno(Game.this, x, y));
-                    setSunScore(getSunScore()-150);
                 }
             }
             activePlantingBrush = PlantVsZombie.PlantType.None;

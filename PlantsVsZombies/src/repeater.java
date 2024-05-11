@@ -2,12 +2,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.*;
 
 
-public class Repeater extends Plant {
+public class repeater extends Plant {
 
     public Timer shootTimer;
 
 
-    public Repeater(Game parent,int x,int y) {
+    public repeater(Game parent,int x,int y) {
         super(parent,x,y);
         shootTimer = new Timer(2000,(ActionEvent e) -> {
             //System.out.println("SHOOT");
