@@ -60,11 +60,11 @@ public class Game extends JLayeredPane implements MouseMotionListener {
         setLayout(null);
         addMouseMotionListener(this);
         this.sunScoreboard = sunScoreboard;
-        setSunScore(150);  
+        setSunScore(1000);  
 
         backgroundImg  = new ImageIcon(this.getClass().getResource("images/mainBG.png")).getImage();
 
-        peashooterImage = new ImageIcon(this.getClass().getResource("images/plants/Peashooter.png")).getImage();
+        peashooterImage = new ImageIcon(this.getClass().getResource("images/plants/peashooter.gif")).getImage();
         freezePeashooterImage = new ImageIcon(this.getClass().getResource("images/plants/SnowPea.png")).getImage();
         sunflowerImage = new ImageIcon(this.getClass().getResource("images/plants/sunflower.gif")).getImage();
         peaImage = new ImageIcon(this.getClass().getResource("images/pea.png")).getImage();
@@ -116,9 +116,9 @@ public class Game extends JLayeredPane implements MouseMotionListener {
 
         sunProducer = new Timer(5000,(ActionEvent e) -> {
             Random random = new Random();
-            Sun sta = new Sun(this,random.nextInt(800)+100,0,random.nextInt(300)+200);
-            activeSuns.add(sta);
-            add(sta,new Integer(1));
+            Sun sun = new Sun(this,random.nextInt(800)+100,0,random.nextInt(300)+200);
+            activeSuns.add(sun);
+            add(sun,new Integer(1));
         });
         sunProducer.start();
 
@@ -127,15 +127,15 @@ public class Game extends JLayeredPane implements MouseMotionListener {
             DataLevel lvl = new DataLevel();
             String [] jnsZombie = lvl.jenisZombie[Integer.parseInt(lvl.Lvl)-1];
             int [][] persen = lvl.Persentase[Integer.parseInt(lvl.Lvl)-1];
-            int l = random.nextInt(5);
-            int t = random.nextInt(100);
-            Zombie z = null;
+            int lane = random.nextInt(5);
+            int prsn = random.nextInt(100);
+            Zombie zombie = null;
             for(int i = 0; i < persen.length; i++) {
-                if(t >= persen[i][0] && t <= persen[i][1]) {
-                    z = Zombie.getZombie(jnsZombie[i],Game.this,l);
+                if(prsn >= persen[i][0] && prsn <= persen[i][1]) {
+                    zombie = Zombie.getZombie(jnsZombie[i],Game.this,lane);
                 }
             }
-            laneZombies.get(l).add(z);
+            laneZombies.get(lane).add(zombie);
         });
         spawnZombie.start();
 
@@ -171,10 +171,10 @@ public class Game extends JLayeredPane implements MouseMotionListener {
             if(c.assignedPlant != null){
                 Plant p = c.assignedPlant;
                 if(p instanceof Peashooter){
-                    g.drawImage(peashooterImage,45 + (i%9)*100,110 + (i/9)*120,null);
+                    g.drawImage(peashooterImage,60 + (i%9)*100,129 + (i/9)*120,null);
                 }
                 if(p instanceof FreezePeashooter){
-                    g.drawImage(freezePeashooterImage,48 + (i%9)*100,129 + (i/9)*120,null);
+                    g.drawImage(freezePeashooterImage,48 + (i%9)*100,110 + (i/9)*120,null);
                 }
                 if(p instanceof Sunflower){
                     g.drawImage(sunflowerImage,60 + (i%9)*100,129 + (i/9)*120,null);
@@ -188,6 +188,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
             }
         }
 
+        // Draw Zombie
         for (int i = 0; i < 5 ; i++) {
             for(Zombie z : laneZombies.get(i)){
                 if(z instanceof NormalZombie){
@@ -203,13 +204,15 @@ public class Game extends JLayeredPane implements MouseMotionListener {
                 }
             }
 
+            // Draw Ball
             for (int j = 0; j < lanePeas.get(i).size(); j++) {
                 Pea p = lanePeas.get(i).get(j);
+                
                 if(p instanceof FreezePea){
-                    g.drawImage(freezePeaImage, p.posX, 130 + (i * 120), null);
+                    g.drawImage(freezePeaImage, p.posX, 140 + (i * 120), null);
                 } else if (p instanceof Pea) {
                     g.drawImage(peaImage, p.posX, 130 + (i * 120), null);
-                } else {
+                } else if (p instanceof DoublePea) {
                     g.drawImage(pea2Image, p.posX, 130 + (i * 120), null);
                 }
             }
@@ -227,6 +230,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
 
     }
 
+    // Card di click
     class PlantActionListener implements ActionListener {
 
         int x,y;
@@ -285,6 +289,8 @@ public class Game extends JLayeredPane implements MouseMotionListener {
         mouseX = e.getX();
         mouseY = e.getY();
     }
+
+    // Level
     static int progress = 0;
     public static void setProgress(int num) {
         progress = progress + num;

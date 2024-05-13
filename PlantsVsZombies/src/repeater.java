@@ -9,11 +9,7 @@ public class repeater extends Plant {
 
     public repeater(Game parent,int x,int y) {
         super(parent,x,y);
-        shootTimer = new Timer(2000,(ActionEvent e) -> {
-            if(game.laneZombies.get(y).size() > 0) {
-                game.lanePeas.get(y).add(new DoublePea(game, y, 103 + this.x * 100));
-            }
-        });
+        shootTimer =  new Timer(2000, new RepeaterShoot(parent, y, x));
         shootTimer.start();
     }
 
