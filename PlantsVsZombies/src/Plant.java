@@ -17,4 +17,8 @@ public abstract class Plant {
 
     public void stop(){}
 
+    public void setHealth (int h){
+        this.health = h;
+    }
+
 }

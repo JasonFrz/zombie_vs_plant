@@ -2,16 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class DoublePea {
-
-    public int posX;
-    protected Game game;
-    public int myLane;
+public class DoublePea extends Pea {
 
     public DoublePea(Game parent,int lane,int startX){
-        this.game = parent;
-        this.myLane = lane;
-        posX = startX;
+        super(parent,lane,startX);
     }
 
     public void advance(){
@@ -23,10 +17,10 @@ public class DoublePea {
                 z.health -= 143;
                 boolean exit = false;
                 if(z.health < 0){
-                    System.out.println("ZOMBIE DIE");
+                    System.out.println("Gacor");
                     
-                    game.laneZombies.get(myLane).remove(i);
                     Game.setProgress(10);
+                    game.laneZombies.get(myLane).remove(i);
                     exit = true;
                 }
                 game.lanePeas.get(myLane).remove(this);

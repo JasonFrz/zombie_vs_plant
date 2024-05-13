@@ -17,6 +17,6 @@ public class Wallnut extends Plant{
     private int x;
      public Wallnut(Game parent,int x,int y) {
         super(parent,x,y);
-        int Hpwall = 2000;
+        setHealth(2000);
     }
 }
