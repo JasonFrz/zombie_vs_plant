@@ -12,6 +12,8 @@ public class Zombie {
     public int posX = 1000;
     public int myLane;
     public boolean isMoving = true;
+    private int currentSprite = 0;
+    private int numSprites = 21;
 
     public Zombie(Game parent,int lane){
         this.game = parent;
@@ -50,6 +52,26 @@ public class Zombie {
                 PlantVsZombie.gameMenu = new PlantVsZombie();
             }
         }
+    }
+
+    public int getCurrentSpriteIndex() {
+        return currentSprite;
+    }
+
+    // Metode untuk mengubah indeks sprite saat ini
+    public void setCurrentSpriteIndex(int index) {
+        currentSprite = index;
+    }
+
+    public void nextSprite() {
+        // Implementasi logika untuk melompat ke sprite berikutnya
+        currentSprite = (currentSprite + 1) % numSprites;
+    }
+
+    // Metode untuk mengubah indeks sprite saat ini ke nilai sebelumnya
+    public void prevSprite() {
+        // Implementasi logika untuk melompat ke sprite sebelumnya
+        currentSprite = (currentSprite - 1 + numSprites) % numSprites;
     }
 
     int slowInt = 0;
