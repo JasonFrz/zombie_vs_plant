@@ -13,5 +13,5 @@ public class BucketHeadZombie extends Zombie {
         super(parent,lane);
         health = 2200;
     }
-    // aaron test
+    // aaron anak paling ganteng kalau dilihat dari sedotan jarak 100km
 }
