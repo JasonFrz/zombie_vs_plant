@@ -95,7 +95,9 @@ public class PlantVsZombie extends JFrame {
         setVisible(true);
         setLocationRelativeTo(null);
     }
+
     static PlantVsZombie gameMenu;
+    
     public static void begin() {
         gameMenu.dispose();
         gameMenu = new PlantVsZombie();
