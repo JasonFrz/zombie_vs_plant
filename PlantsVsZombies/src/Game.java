@@ -81,14 +81,14 @@ public class Game extends JLayeredPane implements MouseMotionListener {
 
         laneZombies = new ArrayList<>();
         laneZombies.add(new ArrayList<>());
-        laneZombies.add(new ArrayList<>()); 
+        laneZombies.add(new ArrayList<>());
         laneZombies.add(new ArrayList<>());
         laneZombies.add(new ArrayList<>()); 
         laneZombies.add(new ArrayList<>());
 
         lanePeas = new ArrayList<>();
         lanePeas.add(new ArrayList<>()); 
-        lanePeas.add(new ArrayList<>()); 
+        lanePeas.add(new ArrayList<>());
         lanePeas.add(new ArrayList<>()); 
         lanePeas.add(new ArrayList<>()); 
         lanePeas.add(new ArrayList<>()); 
@@ -230,6 +230,41 @@ public class Game extends JLayeredPane implements MouseMotionListener {
 
     }
 
+    // Cek lagi gess
+    class OptionsMenu implements ActionListener {
+            
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JDialog dialog = new JDialog();
+            dialog.setSize(200,200);
+            dialog.setLayout(new GridLayout(3,1));
+            JButton save = new JButton("Save");
+            JButton pause = new JButton("pause");
+            JButton exit = new JButton("Exit");
+    
+            save.addActionListener((ActionEvent e1) -> {
+                DataLevel.write("1");
+            });
+    
+            // pause.addActionListener((ActionEvent e1) -> {
+            //     try {
+            //         DataLevel.read();
+            //     } catch (IOException ex) {
+            //         Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            //     }
+            // });
+    
+            exit.addActionListener((ActionEvent e1) -> {
+                System.exit(0);
+            });
+    
+            dialog.add(save);
+            dialog.add(pause);
+            dialog.add(exit);
+            dialog.setVisible(true);
+        }
+    }
+
     // Card di click
     class PlantActionListener implements ActionListener {
 
@@ -313,7 +348,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
                 DataLevel.write("1");
                 System.exit(0);
             }
-           progress = 0;
+            progress = 0;
         }
     }
 }
