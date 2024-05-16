@@ -45,6 +45,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
     int mouseX , mouseY;
 
     private int sunScore;
+    private JButton menuButton;
 
     public int getSunScore() {
         return sunScore;
@@ -64,7 +65,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
 
         backgroundImg  = new ImageIcon(this.getClass().getResource("images/mainBG.png")).getImage();
 
-        peashooterImage = new ImageIcon(this.getClass().getResource("images/plants/peashooter.gif")).getImage();
+        peashooterImage = new ImageIcon(this.getClass().getResource("images/plants/peashooter.png")).getImage();
         freezePeashooterImage = new ImageIcon(this.getClass().getResource("images/plants/SnowPea.png")).getImage();
         sunflowerImage = new ImageIcon(this.getClass().getResource("images/plants/sunflower.gif")).getImage();
         peaImage = new ImageIcon(this.getClass().getResource("images/pea.png")).getImage();
@@ -139,6 +140,16 @@ public class Game extends JLayeredPane implements MouseMotionListener {
         });
         spawnZombie.start();
 
+        menuButton = new JButton("Menu");
+        menuButton.setBounds(855, 0, 140, 35);
+        menuButton.addActionListener(new OptionsMenu());
+        
+        menuButton.setOpaque(false);
+        menuButton.setContentAreaFilled(false);
+        menuButton.setBorderPainted(false);
+        menuButton.setFocusPainted(false);
+        menuButton.setFont(new Font("Arial", Font.BOLD, 18));
+        add(menuButton, new Integer(1));
     }
 
     private void advance(){
@@ -262,6 +273,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
             dialog.add(pause);
             dialog.add(exit);
             dialog.setVisible(true);
+
         }
     }
 
