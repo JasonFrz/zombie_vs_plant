@@ -34,6 +34,9 @@ public class Game extends JLayeredPane implements MouseMotionListener {
     ArrayList<ArrayList<Pea>> lanePeas;
     ArrayList<Sun> activeSuns;
 
+    // sementara
+    ArrayList<Plant> plants = new ArrayList<>();
+
     Timer redrawTimer;
     Timer advancerTimer;
     Timer sunProducer;
@@ -46,6 +49,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
 
     private int sunScore;
     private JButton menuButton;
+    private OptionsMenu optionsMenu;
 
     public int getSunScore() {
         return sunScore;
@@ -54,6 +58,11 @@ public class Game extends JLayeredPane implements MouseMotionListener {
     public void setSunScore(int sunScore) {
         this.sunScore = sunScore;
         sunScoreboard.setText(String.valueOf(sunScore));
+    }
+
+    // ini sementara
+    public void addPlant(Plant plant) {
+        plants.add(plant);
     }
 
     public Game(JLabel sunScoreboard){
@@ -140,9 +149,14 @@ public class Game extends JLayeredPane implements MouseMotionListener {
         });
         spawnZombie.start();
 
+        optionsMenu = new OptionsMenu();
+        optionsMenu.setBounds(250, 120, 500, 500);
+        add(optionsMenu, new Integer(2));
+        optionsMenu.setVisible(false);
+
         menuButton = new JButton("Menu");
         menuButton.setBounds(855, 0, 140, 35);
-        menuButton.addActionListener(new OptionsMenu());
+        menuButton.addActionListener(e -> showOptionsMenu());
         
         menuButton.setOpaque(false);
         menuButton.setContentAreaFilled(false);
@@ -150,6 +164,60 @@ public class Game extends JLayeredPane implements MouseMotionListener {
         menuButton.setFocusPainted(false);
         menuButton.setFont(new Font("Arial", Font.BOLD, 18));
         add(menuButton, new Integer(1));
+    }
+
+    private void showOptionsMenu() {
+        pauseGame();
+        optionsMenu.setVisible(true);
+    }
+
+    public void pauseGame() {
+        redrawTimer.stop();
+        advancerTimer.stop();
+        sunProducer.stop();
+        spawnZombie.stop();
+
+        for (ArrayList<Zombie> lane : laneZombies) {
+            for (Zombie z : lane) {
+                z.isMoving = false;
+            }
+        }
+
+        for (Sun s : activeSuns) {
+            s.pause();
+        }
+
+        // untuk pause sunflower tapi masi gagal
+        // for (Plant plant : plants) {
+        //     if (plant instanceof Sunflower) {
+        //         ((Sunflower) plant).pause();
+        //     }
+        // }
+    }
+
+    public void resumeGame() {
+        redrawTimer.start();
+        advancerTimer.start();
+        sunProducer.start();
+        spawnZombie.start();
+        
+
+        for (ArrayList<Zombie> lane : laneZombies) {
+            for (Zombie z : lane) {
+                z.isMoving = true;
+            }
+        }
+
+        for (Sun s : activeSuns) {
+            s.resume();
+        }
+
+        // utk resume sunflower tapi masi gagal
+        // for (Plant plant : plants) {
+        //     if (plant instanceof Sunflower) {
+        //         ((Sunflower) plant).resume();
+        //     }
+        // }
     }
 
     private void advance(){
@@ -229,51 +297,107 @@ public class Game extends JLayeredPane implements MouseMotionListener {
             }
 
         }
-
-        //if(!"".equals(activePlantingBrush)){
-            //System.out.println(activePlantingBrush);
-            /*if(activePlantingBrush == GameWindow.PlantType.Sunflower) {
-                g.drawImage(sunflowerImage,mouseX,mouseY,null);
-            }*/
-
-        //}
-
-
     }
 
-    // Cek lagi gess
-    class OptionsMenu implements ActionListener {
-            
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            JDialog dialog = new JDialog();
-            dialog.setSize(200,200);
-            dialog.setLayout(new GridLayout(3,1));
-            JButton save = new JButton("Save");
-            JButton pause = new JButton("pause");
-            JButton exit = new JButton("Exit");
+    // ini method yang di panggil kalau tombol next di pencet
+    // public void nextLevel() {
+    //     progress = 0; // Reset progress
+    //     int currentLevel = Integer.parseInt(DataLevel.Lvl);
+    //     int nextLevel = currentLevel + 1;
     
-            save.addActionListener((ActionEvent e1) -> {
-                DataLevel.write("1");
-            });
+    //     if (nextLevel > 4) {
+    //         // Jika level berikutnya melebihi level maksimum, reset ke level pertama atau keluar
+    //         nextLevel = 1;
+    //     }
     
-            // pause.addActionListener((ActionEvent e1) -> {
-            //     try {
-            //         DataLevel.read();
-            //     } catch (IOException ex) {
-            //         Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-            //     }
-            // });
-    
-            exit.addActionListener((ActionEvent e1) -> {
-                System.exit(0);
-            });
-    
-            dialog.add(save);
-            dialog.add(pause);
-            dialog.add(exit);
-            dialog.setVisible(true);
+    //     DataLevel.write(String.valueOf(nextLevel));
+    //     resetGame();
+    // }
 
+    // private void resetGame() {
+    //     // Hentikan semua timer
+    //     redrawTimer.stop();
+    //     advancerTimer.stop();
+    //     sunProducer.stop();
+    //     spawnZombie.stop();
+    
+    //     // Hapus semua objek yang ada
+    //     for (Plant plant : plants) {
+    //         remove(plant);
+    //     }
+    //     plants.clear();
+    
+    //     for (Sun sun : activeSuns) {
+    //         remove(sun);
+    //     }
+    //     activeSuns.clear();
+    
+    //     for (ArrayList<Zombie> lane : laneZombies) {
+    //         for (Zombie z : lane) {
+    //             remove(z);
+    //         }
+    //         lane.clear();
+    //     }
+    
+    //     for (ArrayList<Pea> lane : lanePeas) {
+    //         for (Pea p : lane) {
+    //             remove(p);
+    //         }
+    //         lane.clear();
+    //     }
+    
+    //     // Setel ulang matahari dan skor
+    //     setSunScore(1000); // Anda dapat mengatur nilai awal yang diinginkan
+    
+    //     // Mulai ulang timer
+    //     redrawTimer.start();
+    //     advancerTimer.start();
+    //     sunProducer.start();
+    //     spawnZombie.start();
+    // }
+
+    class OptionsMenu extends JPanel {
+        private Image pauseImage;
+        
+        public OptionsMenu() {
+            setLayout(null);
+            pauseImage = new ImageIcon(this.getClass().getResource("images/Pause.png")).getImage();
+            JButton resume = new JButton("Resume");
+            JButton next = new JButton("Next");
+
+            resume.addActionListener((ActionEvent e) -> {
+                setVisible(false);
+                ((Game) getParent()).resumeGame();
+            });
+            next.addActionListener((ActionEvent e) -> {
+                setVisible(false);
+                // ((Game) getParent()).nextLevel();
+            });
+
+            resume.setBounds(55, 425, 193, 45);
+            next.setBounds(255, 425, 193, 45);
+
+            resume.setOpaque(false);
+            resume.setContentAreaFilled(false);
+            resume.setBorderPainted(false);
+            resume.setFocusPainted(false);
+
+            resume.setForeground(new Color(0, 0, 0, 0));
+            next.setForeground(new Color(0, 0, 0, 0));
+
+            next.setOpaque(false);
+            next.setContentAreaFilled(false);
+            next.setBorderPainted(false);
+            next.setFocusPainted(false);
+
+            add(resume);
+            add(next);
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(pauseImage, -249, -120, 1015, 760, this);
         }
     }
 
@@ -292,6 +416,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
             if(activePlantingBrush == PlantVsZombie.PlantType.Sunflower){
                 if(getSunScore()>=50) {
                     OnFirst[x + y * 9].setPlant(new Sunflower(Game.this, x, y));
+                    addPlant(new Sunflower(Game.this, x, y));
                     setSunScore(getSunScore()-50);
                 }
             }

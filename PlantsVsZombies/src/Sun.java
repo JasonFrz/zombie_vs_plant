@@ -14,6 +14,7 @@ public class Sun extends JPanel implements MouseListener {
     int endY;
 
     int hancur = 200;
+    private boolean isPause = false;
 
     public Sun(Game parent,int startX,int startY,int endY){
         this.gamePlay = parent;
@@ -34,16 +35,26 @@ public class Sun extends JPanel implements MouseListener {
     }
 
     public void advance(){
-        if(myY < endY) {
-            myY+= 4;
-        }else{
-            hancur--;
-            if(hancur<0){
-                gamePlay.remove(this);
-                gamePlay.activeSuns.remove(this);
+        if (!isPause) { // Check if the game is paused
+            if (myY < endY) {
+                myY += 4;
+            } else {
+                hancur--;
+                if (hancur < 0) {
+                    gamePlay.remove(this);
+                    gamePlay.activeSuns.remove(this);
+                }
             }
+            setLocation(myX, myY);
         }
-        setLocation(myX,myY);
+    }
+
+    public void pause() {
+        isPause = true;
+    }
+
+    public void resume() {
+        isPause = false;
     }
 
     @Override

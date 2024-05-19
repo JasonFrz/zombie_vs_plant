@@ -16,4 +16,11 @@ public class Sunflower extends Plant {
         sunProduction.start();
     }
 
+    public void pause() {
+        sunProduction.stop();
+    }
+
+    public void resume() {
+        sunProduction.start();
+    }
 }

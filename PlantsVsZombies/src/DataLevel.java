@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 public class DataLevel {
    static String Lvl = "1";
    static String [][] jenisZombie = {{"NormalZombie"}, {"NormalZombie","ConeHeadZombie"}, {"NormalZombie","ConeHeadZombie", "FootballZombie"}, {"NormalZombie","ConeHeadZombie", "FootballZombie", "gargantuar"}};
-   static int [][][] Persentase = {{{0,99}},{{0,49},{50,99}}, {{0,33},{34,66},{67,99}}, {{0,25},{26,50},{51,75},{76,99}}}; ;
+   static int [][][] Persentase = {{{0,99}},{{0,59},{60,99}}, {{0,43},{44,76},{77,99}}, {{0,35},{36,55},{56,79},{80,99}}}; ;
    public DataLevel() {
        try {
            File file = new File("Level.vbhv");
