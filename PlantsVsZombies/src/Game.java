@@ -23,6 +23,8 @@ public class Game extends JLayeredPane implements MouseMotionListener {
     Image pea2Image;
     Image repeaterImage;
 
+    Image winImage;
+
     Image normalZombieImage;
     Image coneHeadZombieImage;
     Image bucketheadZombieImage;
@@ -82,6 +84,8 @@ public class Game extends JLayeredPane implements MouseMotionListener {
         freezePeaImage = new ImageIcon(this.getClass().getResource("images/freezepea.png")).getImage();
         wallnutImage = new ImageIcon(this.getClass().getResource("images/plants/wallnut.png")).getImage();
         repeaterImage = new ImageIcon(this.getClass().getResource("images/plants/repeater1.png")).getImage();
+        winImage = new ImageIcon(this.getClass().getResource("images/win.png")).getImage(); 
+
 
         // ImageIcon[] normalZombieImages = new ImageIcon[22];
         // for (int i = 0; i < 21; i++) {
@@ -248,64 +252,65 @@ public class Game extends JLayeredPane implements MouseMotionListener {
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(backgroundImg,0,0,null);
+protected void paintComponent(Graphics g) {
+    super.paintComponent(g);
+    g.drawImage(backgroundImg, 0, 0, null);
 
-        //Draw Plants
-        for (int i = 0; i < 45; i++) {
-            Collider c = OnFirst[i];
-            if(c.assignedPlant != null){
-                Plant p = c.assignedPlant;
-                if(p instanceof Peashooter){
-                    g.drawImage(peashooterImage,60 + (i%9)*100,129 + (i/9)*120,null);
-                }
-                if(p instanceof FreezePeashooter){
-                    g.drawImage(freezePeashooterImage,48 + (i%9)*100,110 + (i/9)*120,null);
-                }
-                if(p instanceof Sunflower){
-                    g.drawImage(sunflowerImage,60 + (i%9)*100,129 + (i/9)*120,null);
-                }
-                if(p instanceof Wallnut){
-                    g.drawImage(wallnutImage,45 + (i%9)*100,110 + (i/9)*120,null);
-                }
-                if(p instanceof repeater){
-                    g.drawImage(repeaterImage,65 + (i%9)*100,129 + (i/9)*120,null);
-                }
+    // Draw Plants
+    for (int i = 0; i < 45; i++) {
+        Collider c = OnFirst[i];
+        if (c.assignedPlant != null) {
+            Plant p = c.assignedPlant;
+            if (p instanceof Peashooter) {
+                g.drawImage(peashooterImage, 60 + (i % 9) * 100, 129 + (i / 9) * 120, null);
+            } else if (p instanceof FreezePeashooter) {
+                g.drawImage(freezePeashooterImage, 48 + (i % 9) * 100, 110 + (i / 9) * 120, null);
+            } else if (p instanceof Sunflower) {
+                g.drawImage(sunflowerImage, 60 + (i % 9) * 100, 129 + (i / 9) * 120, null);
+            } else if (p instanceof Wallnut) {
+                g.drawImage(wallnutImage, 45 + (i % 9) * 100, 110 + (i / 9) * 120, null);
+            } else if (p instanceof repeater) {
+                g.drawImage(repeaterImage, 65 + (i % 9) * 100, 129 + (i / 9) * 120, null);
             }
-        }
-
-        // Draw Zombie
-        for (int i = 0; i < 5 ; i++) {
-            for(Zombie z : laneZombies.get(i)){
-                if(z instanceof NormalZombie){
-                    g.drawImage(normalZombieImage,z.posX,109+(i*120),null);
-                }else if(z instanceof ConeHeadZombie){
-                    g.drawImage(coneHeadZombieImage,z.posX,109+(i*120),null);
-                }else if(z instanceof BucketHeadZombie){
-                    g.drawImage(bucketheadZombieImage,z.posX,109+(i*120),null);
-                }else if(z instanceof FootballZombie){
-                    g.drawImage(footballZombieImage,z.posX,109+(i*120),null);
-                }else if(z instanceof gargantuar){
-                    g.drawImage(gargantuarZombieImage,z.posX,109+(i*120),null);
-                }
-            }
-
-            // Draw Ball
-            for (int j = 0; j < lanePeas.get(i).size(); j++) {
-                Pea p = lanePeas.get(i).get(j);
-                
-                if(p instanceof FreezePea){
-                    g.drawImage(freezePeaImage, p.posX, 140 + (i * 120), null);
-                } else if (p instanceof Pea) {
-                    g.drawImage(peaImage, p.posX, 130 + (i * 120), null);
-                } else if (p instanceof DoublePea) {
-                    g.drawImage(pea2Image, p.posX, 130 + (i * 120), null);
-                }
-            }
-
         }
     }
+
+    // Draw Zombies
+    for (int i = 0; i < 5; i++) {
+        for (Zombie z : laneZombies.get(i)) {
+            if (z instanceof NormalZombie) {
+                g.drawImage(normalZombieImage, z.posX, 109 + (i * 120), null);
+            } else if (z instanceof ConeHeadZombie) {
+                g.drawImage(coneHeadZombieImage, z.posX, 109 + (i * 120), null);
+            } else if (z instanceof BucketHeadZombie) {
+                g.drawImage(bucketheadZombieImage, z.posX, 109 + (i * 120), null);
+            } else if (z instanceof FootballZombie) {
+                g.drawImage(footballZombieImage, z.posX, 109 + (i * 120), null);
+            } else if (z instanceof gargantuar) {
+                g.drawImage(gargantuarZombieImage, z.posX, 109 + (i * 120), null);
+            }
+        }
+
+        // Draw Peas
+        for (int j = 0; j < lanePeas.get(i).size(); j++) {
+            Pea p = lanePeas.get(i).get(j);
+
+            if (p instanceof FreezePea) {
+                g.drawImage(freezePeaImage, p.posX, 140 + (i * 120), null);
+            } else if (p instanceof Pea) {
+                g.drawImage(peaImage, p.posX, 130 + (i * 120), null);
+            } else if (p instanceof DoublePea) {
+                g.drawImage(pea2Image, p.posX, 130 + (i * 120), null);
+            }
+        }
+    }
+
+    // Draw Win Image if progress >= 150
+    if (progress >= 150) {
+        g.drawImage(winImage, 250, 150, null); // Adjust the position as needed
+    }
+}
+
 
     // ini method yang di panggil kalau tombol next di pencet
     // public void nextLevel() {
@@ -472,28 +477,38 @@ public class Game extends JLayeredPane implements MouseMotionListener {
 
     // Level
     static int progress = 0;
+    //public static void setProgress(int num) {
+        //progress = progress + num;
+        //System.out.println(progress);
+        //if (progress >= 150) {
+            //((Game) PlantVsZombie.gameMenu.getContentPane()).repaint(); 
+        //}
+    //}
+    
     public static void setProgress(int num) {
         progress = progress + num;
         System.out.println(progress);
         if(progress>=150) {
             if("1".equals(DataLevel.Lvl)) {
-                JOptionPane.showMessageDialog(null,"Anda Menang" + '\n' + "Next Level");
+                
+                ((Game) PlantVsZombie.gameMenu.getContentPane()).repaint();
                 PlantVsZombie.gameMenu.dispose();
                 DataLevel.write("2");
                 PlantVsZombie.gameMenu = new PlantVsZombie();
             }  
             else if("2".equals(DataLevel.Lvl)) {
-                JOptionPane.showMessageDialog(null,"Anda Menang" + '\n' + "Next Level");
+                ((Game) PlantVsZombie.gameMenu.getContentPane()).repaint();
                 PlantVsZombie.gameMenu.dispose();
                 DataLevel.write("3");
                 PlantVsZombie.gameMenu = new PlantVsZombie();
             }  
             else {
-                JOptionPane.showMessageDialog(null,"Anda Menang");
+                ((Game) PlantVsZombie.gameMenu.getContentPane()).repaint();
                 DataLevel.write("1");
                 System.exit(0);
             }
             progress = 0;
         }
     }
+
 }
