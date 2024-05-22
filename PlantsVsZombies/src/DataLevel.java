@@ -4,8 +4,8 @@ import java.util.logging.Logger;
 
 public class DataLevel {
    static String Lvl = "1";
-   static String [][] jenisZombie = {{"NormalZombie"}, {"NormalZombie","ConeHeadZombie"}, {"NormalZombie","ConeHeadZombie", "FootballZombie"}, {"NormalZombie","ConeHeadZombie", "FootballZombie", "gargantuar"}};
-   static int [][][] Persentase = {{{0,99}},{{0,59},{60,99}}, {{0,43},{44,76},{77,99}}, {{0,35},{36,55},{56,79},{80,99}}}; ;
+   static String [][] jenisZombie = {{"NormalZombie"}, {"NormalZombie","ConeHeadZombie"}, {"NormalZombie","ConeHeadZombie", "BucketHeadZombie"}, {"NormalZombie","ConeHeadZombie", "FootballZombie", "BucketHeadZombie"}, {"NormalZombie","ConeHeadZombie", "FootballZombie", "BucketHeadZombie", "gargantuar"}};
+   static int [][][] Persentase = {{{0,99}},{{0,59},{60,99}}, {{0,43},{44,76},{77,99}}, {{0,35},{36,55},{56,79},{80,99}}, {{0,30},{31,48},{49,66},{67,84},{85,99}}}; ;
    public DataLevel() {
        try {
            File file = new File("Level.vbhv");
