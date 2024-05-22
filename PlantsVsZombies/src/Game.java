@@ -20,7 +20,6 @@ public class Game extends JLayeredPane implements MouseMotionListener {
     Image peaImage;
     Image freezePeaImage;
     Image wallnutImage;
-    Image pea2Image;
     Image repeaterImage;
 
     Image winImage;
@@ -80,11 +79,10 @@ public class Game extends JLayeredPane implements MouseMotionListener {
         freezePeashooterImage = new ImageIcon(this.getClass().getResource("images/plants/SnowPea.png")).getImage();
         sunflowerImage = new ImageIcon(this.getClass().getResource("images/plants/sunflower.gif")).getImage();
         peaImage = new ImageIcon(this.getClass().getResource("images/pea.png")).getImage();
-        pea2Image = new ImageIcon(this.getClass().getResource("images/pea_2.png")).getImage();
         freezePeaImage = new ImageIcon(this.getClass().getResource("images/freezepea.png")).getImage();
         wallnutImage = new ImageIcon(this.getClass().getResource("images/plants/wallnut.png")).getImage();
         repeaterImage = new ImageIcon(this.getClass().getResource("images/plants/repeater1.png")).getImage();
-        winImage = new ImageIcon(this.getClass().getResource("images/win.png")).getImage(); 
+        // winImage = new ImageIcon(this.getClass().getResource("images/win.png")).getImage(); 
 
 
         // ImageIcon[] normalZombieImages = new ImageIcon[22];
@@ -270,7 +268,7 @@ protected void paintComponent(Graphics g) {
             } else if (p instanceof Wallnut) {
                 g.drawImage(wallnutImage, 45 + (i % 9) * 100, 110 + (i / 9) * 120, null);
             } else if (p instanceof repeater) {
-                g.drawImage(repeaterImage, 65 + (i % 9) * 100, 129 + (i / 9) * 120, null);
+                g.drawImage(repeaterImage, 58 + (i % 9) * 100, 129 + (i / 9) * 120, null);
             }
         }
     }
@@ -297,18 +295,16 @@ protected void paintComponent(Graphics g) {
 
             if (p instanceof FreezePea) {
                 g.drawImage(freezePeaImage, p.posX, 140 + (i * 120), null);
-            } else if (p instanceof Pea) {
+            } else {
                 g.drawImage(peaImage, p.posX, 130 + (i * 120), null);
-            } else if (p instanceof DoublePea) {
-                g.drawImage(pea2Image, p.posX, 130 + (i * 120), null);
             }
         }
     }
 
     // Draw Win Image if progress >= 150
-    if (progress >= 150) {
-        g.drawImage(winImage, 250, 150, null); // Adjust the position as needed
-    }
+    // if (progress >= 150) {
+    //     g.drawImage(winImage, 250, 150, null); // Adjust the position as needed
+    // }
 }
 
 

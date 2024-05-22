@@ -16,7 +16,8 @@ public class RepeaterShoot implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (game.laneZombies.get(lane).size() > 0) {
-            game.lanePeas.get(lane).add(new DoublePea(game, lane, 103 + x * 100));
+            game.lanePeas.get(lane).add(new Pea(game, lane, 103 + x * 100));
+            game.lanePeas.get(lane).add(new Pea(game, lane, 123 + x * 100));
         }
     }
 }
