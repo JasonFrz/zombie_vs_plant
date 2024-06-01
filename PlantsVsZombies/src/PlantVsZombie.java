@@ -102,6 +102,7 @@ public class PlantVsZombie extends JFrame {
         gameMenu.dispose();
         gameMenu = new PlantVsZombie();
         gameMenu.setLocationRelativeTo(null);
+        DataLevel.write("1");
     }
     public static void main(String[] args) {
         gameMenu = new PlantVsZombie(true);   

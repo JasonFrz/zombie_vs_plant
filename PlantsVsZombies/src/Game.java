@@ -1,4 +1,7 @@
 import javax.swing.*;
+
+import javafx.scene.chart.PieChart.Data;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,9 +38,6 @@ public class Game extends JLayeredPane implements MouseMotionListener {
     ArrayList<ArrayList<Pea>> lanePeas;
     ArrayList<Sun> activeSuns;
 
-    // sementara
-    ArrayList<Plant> plants = new ArrayList<>();
-
     Timer redrawTimer;
     Timer advancerTimer;
     Timer sunProducer;
@@ -59,11 +59,6 @@ public class Game extends JLayeredPane implements MouseMotionListener {
     public void setSunScore(int sunScore) {
         this.sunScore = sunScore;
         sunScoreboard.setText(String.valueOf(sunScore));
-    }
-
-    // ini sementara
-    public void addPlant(Plant plant) {
-        plants.add(plant);
     }
 
     public Game(JLabel sunScoreboard){
@@ -121,8 +116,6 @@ public class Game extends JLayeredPane implements MouseMotionListener {
             OnFirst[i] = a;
             add(a,new Integer(0));
         }
-
-
 
         activeSuns = new ArrayList<>();
 
@@ -197,12 +190,21 @@ public class Game extends JLayeredPane implements MouseMotionListener {
             s.pause();
         }
 
-        // untuk pause sunflower tapi masi gagal
-        // for (Plant plant : plants) {
-        //     if (plant instanceof Sunflower) {
-        //         ((Sunflower) plant).pause();
-        //     }
-        // }
+        for (int i = 0; i < OnFirst.length; i++) {
+            if (OnFirst[i].assignedPlant instanceof Sunflower) {
+                ((Sunflower) OnFirst[i].assignedPlant).pause();
+            }
+            else if (OnFirst[i].assignedPlant instanceof Peashooter) {
+                ((Peashooter) OnFirst[i].assignedPlant).pause();
+            }
+            else if (OnFirst[i].assignedPlant instanceof repeater) {
+                ((repeater) OnFirst[i].assignedPlant).pause();
+            }
+            else if (OnFirst[i].assignedPlant instanceof FreezePeashooter) {
+                ((FreezePeashooter) OnFirst[i].assignedPlant).pause();
+            }
+        }
+
     }
 
     public void resumeGame() {
@@ -222,12 +224,20 @@ public class Game extends JLayeredPane implements MouseMotionListener {
             s.resume();
         }
 
-        // utk resume sunflower tapi masi gagal
-        // for (Plant plant : plants) {
-        //     if (plant instanceof Sunflower) {
-        //         ((Sunflower) plant).resume();
-        //     }
-        // }
+        for (int i = 0; i < OnFirst.length; i++) {
+            if (OnFirst[i].assignedPlant instanceof Sunflower) {
+                ((Sunflower) OnFirst[i].assignedPlant).resume();
+            }
+            else if (OnFirst[i].assignedPlant instanceof Peashooter) {
+                ((Peashooter) OnFirst[i].assignedPlant).resume();
+            }
+            else if (OnFirst[i].assignedPlant instanceof repeater) {
+                ((repeater) OnFirst[i].assignedPlant).resume();
+            }
+            else if (OnFirst[i].assignedPlant instanceof FreezePeashooter) {
+                ((FreezePeashooter) OnFirst[i].assignedPlant).resume();
+            }
+        }
     }
 
     private void advance(){
@@ -307,63 +317,52 @@ protected void paintComponent(Graphics g) {
     // }
 }
 
+    public void nextLevel() {
+        resetGame();
 
-    // ini method yang di panggil kalau tombol next di pencet
-    // public void nextLevel() {
-    //     progress = 0; // Reset progress
-    //     int currentLevel = Integer.parseInt(DataLevel.Lvl);
-    //     int nextLevel = currentLevel + 1;
+        progress = 0;
+        int currentLevel = Integer.parseInt(DataLevel.Lvl);
+        int nextLevel = currentLevel + 1;
     
-    //     if (nextLevel > 4) {
-    //         // Jika level berikutnya melebihi level maksimum, reset ke level pertama atau keluar
-    //         nextLevel = 1;
-    //     }
+        if (nextLevel > 5) {
+            nextLevel = 1;
+        }
     
-    //     DataLevel.write(String.valueOf(nextLevel));
-    //     resetGame();
-    // }
+        DataLevel.write(String.valueOf(nextLevel));
 
-    // private void resetGame() {
-    //     // Hentikan semua timer
-    //     redrawTimer.stop();
-    //     advancerTimer.stop();
-    //     sunProducer.stop();
-    //     spawnZombie.stop();
+        ((Game) PlantVsZombie.gameMenu.getContentPane()).repaint();
+        PlantVsZombie.gameMenu.dispose();
+        PlantVsZombie.gameMenu = new PlantVsZombie();
+    }
+
+    private void resetGame() {
+        redrawTimer.stop();
+        advancerTimer.stop();
+        sunProducer.stop();
+        spawnZombie.stop();
     
-    //     // Hapus semua objek yang ada
-    //     for (Plant plant : plants) {
-    //         remove(plant);
-    //     }
-    //     plants.clear();
+        for (Collider collider : OnFirst) {
+            if (collider.assignedPlant != null) {
+                collider.removePlant();
+            }
+        }
+
+        for (int i = 0; i < 5; i++) {
+            laneZombies.get(i).clear();
+            lanePeas.get(i).clear();
+        }
+
+        activeSuns.clear();
+        setSunScore(1000);
     
-    //     for (Sun sun : activeSuns) {
-    //         remove(sun);
-    //     }
-    //     activeSuns.clear();
-    
-    //     for (ArrayList<Zombie> lane : laneZombies) {
-    //         for (Zombie z : lane) {
-    //             remove(z);
-    //         }
-    //         lane.clear();
-    //     }
-    
-    //     for (ArrayList<Pea> lane : lanePeas) {
-    //         for (Pea p : lane) {
-    //             remove(p);
-    //         }
-    //         lane.clear();
-    //     }
-    
-    //     // Setel ulang matahari dan skor
-    //     setSunScore(1000); // Anda dapat mengatur nilai awal yang diinginkan
-    
-    //     // Mulai ulang timer
-    //     redrawTimer.start();
-    //     advancerTimer.start();
-    //     sunProducer.start();
-    //     spawnZombie.start();
-    // }
+        redrawTimer.start();
+        advancerTimer.start();
+        sunProducer.start();
+        spawnZombie.start();
+
+        this.revalidate();
+        this.repaint();
+    }
 
     class OptionsMenu extends JPanel {
         private Image pauseImage;
@@ -380,7 +379,7 @@ protected void paintComponent(Graphics g) {
             });
             next.addActionListener((ActionEvent e) -> {
                 setVisible(false);
-                // ((Game) getParent()).nextLevel();
+                ((Game) getParent()).nextLevel();
             });
 
             resume.setBounds(55, 425, 193, 45);
@@ -425,7 +424,6 @@ protected void paintComponent(Graphics g) {
             if(activePlantingBrush == PlantVsZombie.PlantType.Sunflower){
                 if(getSunScore()>=50) {
                     OnFirst[x + y * 9].setPlant(new Sunflower(Game.this, x, y));
-                    addPlant(new Sunflower(Game.this, x, y));
                     setSunScore(getSunScore()-50);
                 }
             }
@@ -484,9 +482,9 @@ protected void paintComponent(Graphics g) {
     public static void setProgress(int num) {
         progress = progress + num;
         System.out.println(progress);
+        System.out.println(DataLevel.Lvl);
         if(progress>=150) {
             if("1".equals(DataLevel.Lvl)) {
-                
                 ((Game) PlantVsZombie.gameMenu.getContentPane()).repaint();
                 PlantVsZombie.gameMenu.dispose();
                 DataLevel.write("2");
@@ -496,6 +494,18 @@ protected void paintComponent(Graphics g) {
                 ((Game) PlantVsZombie.gameMenu.getContentPane()).repaint();
                 PlantVsZombie.gameMenu.dispose();
                 DataLevel.write("3");
+                PlantVsZombie.gameMenu = new PlantVsZombie();
+            }  
+            else if("3".equals(DataLevel.Lvl)) {
+                ((Game) PlantVsZombie.gameMenu.getContentPane()).repaint();
+                PlantVsZombie.gameMenu.dispose();
+                DataLevel.write("4");
+                PlantVsZombie.gameMenu = new PlantVsZombie();
+            }  
+            else if("4".equals(DataLevel.Lvl)) {
+                ((Game) PlantVsZombie.gameMenu.getContentPane()).repaint();
+                PlantVsZombie.gameMenu.dispose();
+                DataLevel.write("5");
                 PlantVsZombie.gameMenu = new PlantVsZombie();
             }  
             else {

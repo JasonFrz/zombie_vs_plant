@@ -18,4 +18,11 @@ public class repeater extends Plant {
         shootTimer.stop();
     }
 
+    public void resume(){
+        shootTimer.start();
+    }
+
+    public void pause(){
+        shootTimer.stop();
+    }
 }

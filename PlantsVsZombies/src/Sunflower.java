@@ -23,4 +23,11 @@ public class Sunflower extends Plant {
     public void resume() {
         sunProduction.start();
     }
+
+    @Override
+    public void stop() {
+        if (sunProduction != null) {
+            sunProduction.stop();
+        }
+    }
 }
