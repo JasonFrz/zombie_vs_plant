@@ -70,7 +70,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
 
         backgroundImg  = new ImageIcon(this.getClass().getResource("images/mainBG.png")).getImage();
 
-        peashooterImage = new ImageIcon(this.getClass().getResource("images/plants/peashooter.png")).getImage();
+        peashooterImage = new ImageIcon(this.getClass().getResource("images/plants/peashooter.gif")).getImage();
         freezePeashooterImage = new ImageIcon(this.getClass().getResource("images/plants/SnowPea.png")).getImage();
         sunflowerImage = new ImageIcon(this.getClass().getResource("images/plants/sunflower.gif")).getImage();
         peaImage = new ImageIcon(this.getClass().getResource("images/pea.png")).getImage();
