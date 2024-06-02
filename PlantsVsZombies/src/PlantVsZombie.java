@@ -12,8 +12,7 @@ public class PlantVsZombie extends JFrame {
         Wallnut,
         Repeater,
         Jalapeno,
-        PotatoMine,
-        
+        PotatoMine
     }
 
     //PlantType activePlantingBrush = PlantType.None;

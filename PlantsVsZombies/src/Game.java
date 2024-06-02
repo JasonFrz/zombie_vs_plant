@@ -24,6 +24,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
     Image freezePeaImage;
     Image wallnutImage;
     Image repeaterImage;
+    Image potatoMineImage;
 
     Image winImage;
 
@@ -77,6 +78,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
         freezePeaImage = new ImageIcon(this.getClass().getResource("images/freezepea.png")).getImage();
         wallnutImage = new ImageIcon(this.getClass().getResource("images/plants/wallnut.png")).getImage();
         repeaterImage = new ImageIcon(this.getClass().getResource("images/plants/repeater1.png")).getImage();
+        potatoMineImage = new ImageIcon(this.getClass().getResource("images/plants/PotatoMine1.png")).getImage();
         // winImage = new ImageIcon(this.getClass().getResource("images/win.png")).getImage(); 
 
 
@@ -279,6 +281,8 @@ protected void paintComponent(Graphics g) {
                 g.drawImage(wallnutImage, 45 + (i % 9) * 100, 110 + (i / 9) * 120, null);
             } else if (p instanceof repeater) {
                 g.drawImage(repeaterImage, 58 + (i % 9) * 100, 129 + (i / 9) * 120, null);
+            } else if(p instanceof Potatomine){
+                g.drawImage(potatoMineImage, 58 + (i % 9) * 100, 129 + (i / 9) * 120, null);
             }
         }
     }
@@ -452,6 +456,12 @@ protected void paintComponent(Graphics g) {
                 if(getSunScore() >= 200) {
                     OnFirst[x + y * 9].setPlant(new repeater(Game.this, x, y));
                     setSunScore(getSunScore()-200);
+                }
+            }
+            if(activePlantingBrush == PlantVsZombie.PlantType.PotatoMine){
+                if(getSunScore() >= 25){
+                    OnFirst[x + y * 9].setPlant(new Potatomine(Game.this, x, y));
+                    setSunScore(getSunScore() - 25);
                 }
             }
             activePlantingBrush = PlantVsZombie.PlantType.None;
