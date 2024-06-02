@@ -204,6 +204,8 @@ public class Game extends JLayeredPane implements MouseMotionListener {
             }
             else if (OnFirst[i].assignedPlant instanceof FreezePeashooter) {
                 ((FreezePeashooter) OnFirst[i].assignedPlant).pause();
+            }else if(OnFirst[i].assignedPlant instanceof Potatomine){
+                ((Potatomine) OnFirst[i].assignedPlant).pause();
             }
         }
 
@@ -238,6 +240,8 @@ public class Game extends JLayeredPane implements MouseMotionListener {
             }
             else if (OnFirst[i].assignedPlant instanceof FreezePeashooter) {
                 ((FreezePeashooter) OnFirst[i].assignedPlant).resume();
+            }else if(OnFirst[i].assignedPlant instanceof Potatomine){
+                ((Potatomine) OnFirst[i].assignedPlant).resume();
             }
         }
     }
