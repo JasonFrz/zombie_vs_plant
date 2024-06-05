@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-import javafx.scene.chart.PieChart.Data;
+// import javafx.scene.chart.PieChart.Data;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -77,20 +77,11 @@ public class Game extends JLayeredPane implements MouseMotionListener {
         peaImage = new ImageIcon(this.getClass().getResource("images/pea.png")).getImage();
         freezePeaImage = new ImageIcon(this.getClass().getResource("images/freezepea.png")).getImage();
         wallnutImage = new ImageIcon(this.getClass().getResource("images/plants/wallnut.png")).getImage();
-        repeaterImage = new ImageIcon(this.getClass().getResource("images/plants/repeater1.png")).getImage();
+        repeaterImage = new ImageIcon(this.getClass().getResource("images/plants/Repeater.gif")).getImage();
         potatoMineImage = new ImageIcon(this.getClass().getResource("images/plants/PotatoMine1.png")).getImage();
         // winImage = new ImageIcon(this.getClass().getResource("images/win.png")).getImage(); 
 
-
-        // ImageIcon[] normalZombieImages = new ImageIcon[22];
-        // for (int i = 0; i < 21; i++) {
-        //     normalZombieImages[i] = new ImageIcon(this.getClass().getResource("images/zombie/normal" + i + ".png"));
-        // }
-        // int frameDelay = 100;
-        // animateSprite normalZombieSprite = new animateSprite(normalZombieImages, frameDelay);
-        // add(normalZombieSprite);
-
-        normalZombieImage = new ImageIcon(this.getClass().getResource("images/zombies/NormalZombie.png")).getImage();
+        normalZombieImage = new ImageIcon(this.getClass().getResource("images/zombies/zombie1.gif")).getImage();
         coneHeadZombieImage = new ImageIcon(this.getClass().getResource("images/zombies/ConeheadZombie.png")).getImage();
         bucketheadZombieImage = new ImageIcon(this.getClass().getResource("images/zombies/BuckheadZombie.png")).getImage();
         footballZombieImage = new ImageIcon(this.getClass().getResource("images/zombies/FootballZombie.png")).getImage();
@@ -204,9 +195,10 @@ public class Game extends JLayeredPane implements MouseMotionListener {
             }
             else if (OnFirst[i].assignedPlant instanceof FreezePeashooter) {
                 ((FreezePeashooter) OnFirst[i].assignedPlant).pause();
-            }else if(OnFirst[i].assignedPlant instanceof Potatomine){
-                ((Potatomine) OnFirst[i].assignedPlant).pause();
             }
+            // else if(OnFirst[i].assignedPlant instanceof Potatomine){
+            //     ((Potatomine) OnFirst[i].assignedPlant).pause();
+            // }
         }
 
     }
@@ -240,9 +232,10 @@ public class Game extends JLayeredPane implements MouseMotionListener {
             }
             else if (OnFirst[i].assignedPlant instanceof FreezePeashooter) {
                 ((FreezePeashooter) OnFirst[i].assignedPlant).resume();
-            }else if(OnFirst[i].assignedPlant instanceof Potatomine){
-                ((Potatomine) OnFirst[i].assignedPlant).resume();
             }
+            // else if(OnFirst[i].assignedPlant instanceof Potatomine){
+            //     ((Potatomine) OnFirst[i].assignedPlant).resume();
+            // }
         }
     }
 
@@ -266,7 +259,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
     }
 
     @Override
-protected void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     g.drawImage(backgroundImg, 0, 0, null);
 
@@ -285,9 +278,10 @@ protected void paintComponent(Graphics g) {
                 g.drawImage(wallnutImage, 45 + (i % 9) * 100, 110 + (i / 9) * 120, null);
             } else if (p instanceof repeater) {
                 g.drawImage(repeaterImage, 58 + (i % 9) * 100, 129 + (i / 9) * 120, null);
-            } else if(p instanceof Potatomine){
-                g.drawImage(potatoMineImage, 58 + (i % 9) * 100, 129 + (i / 9) * 120, null);
-            }
+            } 
+            // else if(p instanceof Potatomine){
+            //     g.drawImage(potatoMineImage, 58 + (i % 9) * 100, 129 + (i / 9) * 120, null);
+            // }
         }
     }
 
@@ -462,12 +456,12 @@ protected void paintComponent(Graphics g) {
                     setSunScore(getSunScore()-200);
                 }
             }
-            if(activePlantingBrush == PlantVsZombie.PlantType.PotatoMine){
-                if(getSunScore() >= 25){
-                    OnFirst[x + y * 9].setPlant(new Potatomine(Game.this, x, y));
-                    setSunScore(getSunScore() - 25);
-                }
-            }
+            // if(activePlantingBrush == PlantVsZombie.PlantType.PotatoMine){
+            //     if(getSunScore() >= 25){
+            //         OnFirst[x + y * 9].setPlant(new Potatomine(Game.this, x, y));
+            //         setSunScore(getSunScore() - 25);
+            //     }
+            // }
             activePlantingBrush = PlantVsZombie.PlantType.None;
         }
     }
