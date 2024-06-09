@@ -47,7 +47,7 @@ public class Zombie {
                 isMoving = false;
                 JOptionPane.showMessageDialog(game,"ZOMBIE MAKAN OTAK MU :P");
                 PlantVsZombie.gameMenu.dispose();
-                PlantVsZombie.gameMenu = new PlantVsZombie();
+                // PlantVsZombie.gameMenu = new PlantVsZombie();
             }
         }
     }
@@ -56,6 +56,7 @@ public class Zombie {
     public void slow(){
         slowInt = 1000;
     }
+    
     public static Zombie getZombie(String type,Game parent, int lane) {
         Zombie z = new Zombie(parent,lane);
         switch(type) {

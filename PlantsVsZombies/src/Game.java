@@ -81,7 +81,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
         potatoMineImage = new ImageIcon(this.getClass().getResource("images/plants/PotatoMine1.png")).getImage();
         // winImage = new ImageIcon(this.getClass().getResource("images/win.png")).getImage(); 
 
-        normalZombieImage = new ImageIcon(this.getClass().getResource("images/zombies/zombie1.gif")).getImage();
+        normalZombieImage = new ImageIcon(this.getClass().getResource("images/zombies/NormalZombiee.gif")).getImage();
         coneHeadZombieImage = new ImageIcon(this.getClass().getResource("images/zombies/ConeheadZombie.png")).getImage();
         bucketheadZombieImage = new ImageIcon(this.getClass().getResource("images/zombies/BuckheadZombie.png")).getImage();
         footballZombieImage = new ImageIcon(this.getClass().getResource("images/zombies/FootballZombie.png")).getImage();
@@ -196,9 +196,6 @@ public class Game extends JLayeredPane implements MouseMotionListener {
             else if (OnFirst[i].assignedPlant instanceof FreezePeashooter) {
                 ((FreezePeashooter) OnFirst[i].assignedPlant).pause();
             }
-            // else if(OnFirst[i].assignedPlant instanceof Potatomine){
-            //     ((Potatomine) OnFirst[i].assignedPlant).pause();
-            // }
         }
 
     }
@@ -233,9 +230,6 @@ public class Game extends JLayeredPane implements MouseMotionListener {
             else if (OnFirst[i].assignedPlant instanceof FreezePeashooter) {
                 ((FreezePeashooter) OnFirst[i].assignedPlant).resume();
             }
-            // else if(OnFirst[i].assignedPlant instanceof Potatomine){
-            //     ((Potatomine) OnFirst[i].assignedPlant).resume();
-            // }
         }
     }
 
@@ -277,7 +271,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
             } else if (p instanceof Wallnut) {
                 g.drawImage(wallnutImage, 45 + (i % 9) * 100, 110 + (i / 9) * 120, null);
             } else if (p instanceof repeater) {
-                g.drawImage(repeaterImage, 58 + (i % 9) * 100, 129 + (i / 9) * 120, null);
+                g.drawImage(repeaterImage, 33 + (i % 9) * 100, 100 + (i / 9) * 120, null);
             } 
             // else if(p instanceof Potatomine){
             //     g.drawImage(potatoMineImage, 58 + (i % 9) * 100, 129 + (i / 9) * 120, null);
@@ -324,15 +318,30 @@ public class Game extends JLayeredPane implements MouseMotionListener {
 
         progress = 0;
         int currentLevel = Integer.parseInt(DataLevel.Lvl);
-        int nextLevel = currentLevel + 1;
+        int nextLevell = currentLevel + 1;
     
-        if (nextLevel > 5) {
-            nextLevel = 1;
+        if (nextLevell > 5) {
+            nextLevell = 1;
+            PlantVsZombie.cardFreezePeashooter = false;
+            PlantVsZombie.cardRepeater = false;
+            PlantVsZombie.cardJalapeno = false;
+            PlantVsZombie.cardPotato = false;
+        }
+
+        if (nextLevell == 2){
+            PlantVsZombie.cardFreezePeashooter = true;
+        } else if (nextLevell == 3){
+            PlantVsZombie.cardRepeater = true;
+        } else if (nextLevell == 4){
+            PlantVsZombie.cardJalapeno = true;
+        } else if (nextLevell == 5){
+            PlantVsZombie.cardPotato = true;
         }
     
-        DataLevel.write(String.valueOf(nextLevel));
+        unlockPlant(nextLevell);
+        DataLevel.write(String.valueOf(nextLevell));
 
-        ((Game) PlantVsZombie.gameMenu.getContentPane()).repaint();
+        // ((Game) PlantVsZombie.gameMenu.getContentPane()).repaint();
         PlantVsZombie.gameMenu.dispose();
         PlantVsZombie.gameMenu = new PlantVsZombie();
     }
@@ -364,6 +373,13 @@ public class Game extends JLayeredPane implements MouseMotionListener {
 
         this.revalidate();
         this.repaint();
+    }
+
+    private void unlockPlant(int level) {
+        PlantVsZombie parentFrame = (PlantVsZombie) SwingUtilities.getWindowAncestor(this);
+
+        parentFrame.unlock(level);
+
     }
 
     class OptionsMenu extends JPanel {
@@ -496,24 +512,28 @@ public class Game extends JLayeredPane implements MouseMotionListener {
                 ((Game) PlantVsZombie.gameMenu.getContentPane()).repaint();
                 PlantVsZombie.gameMenu.dispose();
                 DataLevel.write("2");
+                PlantVsZombie.cardFreezePeashooter = true;
                 PlantVsZombie.gameMenu = new PlantVsZombie();
             }  
             else if("2".equals(DataLevel.Lvl)) {
                 ((Game) PlantVsZombie.gameMenu.getContentPane()).repaint();
                 PlantVsZombie.gameMenu.dispose();
                 DataLevel.write("3");
+                PlantVsZombie.cardRepeater = true;
                 PlantVsZombie.gameMenu = new PlantVsZombie();
             }  
             else if("3".equals(DataLevel.Lvl)) {
                 ((Game) PlantVsZombie.gameMenu.getContentPane()).repaint();
                 PlantVsZombie.gameMenu.dispose();
                 DataLevel.write("4");
+                PlantVsZombie.cardJalapeno = true;
                 PlantVsZombie.gameMenu = new PlantVsZombie();
             }  
             else if("4".equals(DataLevel.Lvl)) {
                 ((Game) PlantVsZombie.gameMenu.getContentPane()).repaint();
                 PlantVsZombie.gameMenu.dispose();
                 DataLevel.write("5");
+                PlantVsZombie.cardPotato = true;
                 PlantVsZombie.gameMenu = new PlantVsZombie();
             }  
             else {
