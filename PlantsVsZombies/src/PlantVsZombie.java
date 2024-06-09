@@ -21,13 +21,21 @@ public class PlantVsZombie extends JFrame {
         PotatoMine
     }
 
-    static boolean cardSunflower = true;
-    static boolean cardPeashooter = true;
-    static boolean cardWallnut = true;
+    static boolean cardSunflower = false;
+    static boolean cardPeashooter = false;
+    static boolean cardWallnut = false;
     static boolean cardFreezePeashooter = false;
     static boolean cardRepeater = false;
     static boolean cardJalapeno = false;
     static boolean cardPotato = false;
+
+    static boolean showCardSunflower = true;
+    static boolean showCardPeashooter = true;
+    static boolean showCardWallnut = true;
+    static boolean showCardFreezePeashooter = false;
+    static boolean showCardRepeater = false;
+    static boolean showCardJalapeno = false;
+    static boolean showCardPotato = false;
     //PlantType activePlantingBrush = PlantType.None;
     
     public PlantVsZombie(){
@@ -53,7 +61,7 @@ public class PlantVsZombie extends JFrame {
         }
         
         if (cardPeashooter){
-            PlantCard peashooter = new PlantCard(new ImageIcon(this.getClass().getResource("images/cards/card_peashooter.png")).getImage());
+            PlantCard peashooter = new PlantCard(new ImageIcon(this.getClass().getResource("images/cards/card_Peashooter.png")).getImage());
             peashooter.setLocation(175,8);
             peashooter.setAction((ActionEvent e) -> {
                 onGame.activePlantingBrush = PlantType.Peashooter;
@@ -123,23 +131,6 @@ public class PlantVsZombie extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    public void unlock(int level){
-        switch(level){
-            case 2:
-                cardFreezePeashooter = true;
-                break;
-            case 3:
-                cardRepeater = true;
-                break;
-            case 4:
-                cardJalapeno = true;
-                break;
-            case 5:
-                cardPotato = true;
-                break;
-        }
-    }
-
     static PlantVsZombie gameMenu;
     
     public static void begin() {
@@ -152,4 +143,12 @@ public class PlantVsZombie extends JFrame {
         gameMenu = new PlantVsZombie(true);   
     }
 
+    // public static void pickPlant(){
+    //     gameMenu.dispose(); // Menutup jendela MainMenu
+    //     gameMenu = new PlantVsZombie(); // Membuat instance baru dari PlantVsZombie
+    //     PickPlants pickPlants = new PickPlants(); // Membuat instance PickPlants
+    //     gameMenu.setContentPane(pickPlants); // Mengatur konten jendela ke PickPlants
+    //     gameMenu.validate(); // Melakukan validasi jendela untuk memastikan layout terupdate
+    //     gameMenu.repaint(); // Melakukan repaint jendela untuk menampilkan perubahan
+    // }
 }

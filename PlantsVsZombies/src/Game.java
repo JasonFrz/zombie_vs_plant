@@ -233,6 +233,67 @@ public class Game extends JLayeredPane implements MouseMotionListener {
         }
     }
 
+    public void nextLevel() {
+        resetGame();
+
+        progress = 0;
+        int currentLevel = Integer.parseInt(DataLevel.Lvl);
+        int nextLevell = currentLevel + 1;
+    
+        if (nextLevell > 5) {
+            nextLevell = 1;
+            PlantVsZombie.cardFreezePeashooter = false;
+            PlantVsZombie.cardRepeater = false;
+            PlantVsZombie.cardJalapeno = false;
+            PlantVsZombie.cardPotato = false;
+        }
+
+        if (nextLevell == 2){
+            PlantVsZombie.cardFreezePeashooter = true;
+        } else if (nextLevell == 3){
+            PlantVsZombie.cardRepeater = true;
+        } else if (nextLevell == 4){
+            PlantVsZombie.cardJalapeno = true;
+        } else if (nextLevell == 5){
+            PlantVsZombie.cardPotato = true;
+        }
+
+        DataLevel.write(String.valueOf(nextLevell));
+
+        // ((Game) PlantVsZombie.gameMenu.getContentPane()).repaint();
+        PlantVsZombie.gameMenu.dispose();
+        PlantVsZombie.gameMenu = new PlantVsZombie();
+    }
+
+    private void resetGame() {
+        redrawTimer.stop();
+        advancerTimer.stop();
+        sunProducer.stop();
+        spawnZombie.stop();
+    
+        for (Collider collider : OnFirst) {
+            if (collider.assignedPlant != null) {
+                collider.removePlant();
+            }
+        }
+
+        for (int i = 0; i < 5; i++) {
+            laneZombies.get(i).clear();
+            lanePeas.get(i).clear();
+        }
+
+        activeSuns.clear();
+        setSunScore(1000);
+    
+        redrawTimer.start();
+        advancerTimer.start();
+        sunProducer.start();
+        spawnZombie.start();
+
+        this.revalidate();
+        this.repaint();
+    }
+
     private void advance(){
         for (int i = 0; i < 5 ; i++) {
             for(Zombie z : laneZombies.get(i)){
@@ -313,74 +374,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
     // }
 }
 
-    public void nextLevel() {
-        resetGame();
-
-        progress = 0;
-        int currentLevel = Integer.parseInt(DataLevel.Lvl);
-        int nextLevell = currentLevel + 1;
     
-        if (nextLevell > 5) {
-            nextLevell = 1;
-            PlantVsZombie.cardFreezePeashooter = false;
-            PlantVsZombie.cardRepeater = false;
-            PlantVsZombie.cardJalapeno = false;
-            PlantVsZombie.cardPotato = false;
-        }
-
-        if (nextLevell == 2){
-            PlantVsZombie.cardFreezePeashooter = true;
-        } else if (nextLevell == 3){
-            PlantVsZombie.cardRepeater = true;
-        } else if (nextLevell == 4){
-            PlantVsZombie.cardJalapeno = true;
-        } else if (nextLevell == 5){
-            PlantVsZombie.cardPotato = true;
-        }
-    
-        unlockPlant(nextLevell);
-        DataLevel.write(String.valueOf(nextLevell));
-
-        // ((Game) PlantVsZombie.gameMenu.getContentPane()).repaint();
-        PlantVsZombie.gameMenu.dispose();
-        PlantVsZombie.gameMenu = new PlantVsZombie();
-    }
-
-    private void resetGame() {
-        redrawTimer.stop();
-        advancerTimer.stop();
-        sunProducer.stop();
-        spawnZombie.stop();
-    
-        for (Collider collider : OnFirst) {
-            if (collider.assignedPlant != null) {
-                collider.removePlant();
-            }
-        }
-
-        for (int i = 0; i < 5; i++) {
-            laneZombies.get(i).clear();
-            lanePeas.get(i).clear();
-        }
-
-        activeSuns.clear();
-        setSunScore(1000);
-    
-        redrawTimer.start();
-        advancerTimer.start();
-        sunProducer.start();
-        spawnZombie.start();
-
-        this.revalidate();
-        this.repaint();
-    }
-
-    private void unlockPlant(int level) {
-        PlantVsZombie parentFrame = (PlantVsZombie) SwingUtilities.getWindowAncestor(this);
-
-        parentFrame.unlock(level);
-
-    }
 
     class OptionsMenu extends JPanel {
         private Image pauseImage;

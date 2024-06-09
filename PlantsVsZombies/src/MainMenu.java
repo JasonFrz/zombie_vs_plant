@@ -5,7 +5,6 @@ import javax.swing.*;
 public class MainMenu extends JPanel {
 
     Image bgImage;
-    private JButton menuButton;
 
     public MainMenu() {
         initComponents();
@@ -23,7 +22,6 @@ public class MainMenu extends JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        // menuButton = new JButton("Menu");
 
         setPreferredSize(new java.awt.Dimension(1012, 785));
 
@@ -33,31 +31,6 @@ public class MainMenu extends JPanel {
                 jPanel1MouseClicked(evt);
             }
         });
-        // menuButton.setBounds(900, 10, 80, 30); // Set button bounds
-        // menuButton.addActionListener(e -> {
-        //     // Add action listener for menu button
-        //     JDialog dialog = new JDialog();
-        //     dialog.setSize(200, 200);
-        //     dialog.setLayout(new GridLayout(3, 1));
-        //     JButton save = new JButton("Save");
-        //     JButton pause = new JButton("Pause");
-        //     JButton exit = new JButton("Exit");
-
-        //     save.addActionListener(e1 -> {
-        //         DataLevel.write("1");
-        //     });
-
-        //     exit.addActionListener(e1 -> {
-        //         System.exit(0);
-        //     });
-
-        //     dialog.add(save);
-        //     dialog.add(pause);
-        //     dialog.add(exit);
-        //     dialog.setVisible(true);
-        // });
-        // add(menuButton);
-        // add(jPanel1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -89,7 +62,13 @@ public class MainMenu extends JPanel {
     }
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {
-        PlantVsZombie.begin();
+        JFrame pickPlantsFrame = new JFrame();
+        pickPlantsFrame.setSize(470, 535);
+        pickPlantsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        pickPlantsFrame.add(new PickPlants());
+        pickPlantsFrame.setVisible(true);
+        pickPlantsFrame.setLocationRelativeTo(null);
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
