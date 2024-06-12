@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 // import javafx.event.ActionEvent;
@@ -148,6 +147,7 @@ public class PickPlants extends JPanel {
         letsRock.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                setVisible(false);
                 PlantVsZombie.begin();
             }
         });

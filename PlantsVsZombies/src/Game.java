@@ -383,7 +383,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
             } else if (p instanceof repeater) {
                 g.drawImage(repeaterImage, 33 + (i % 9) * 100, 100 + (i / 9) * 120, null);
             } else if(p instanceof Potatomine){
-                g.drawImage(potatoMineImage, 58 + (i % 9) * 100, 129 + (i / 9) * 120, null);
+                g.drawImage(potatoMineImage, 45 + (i % 9) * 100, 129 + (i / 9) * 120, null);
             } else if(p instanceof jalapeno){
                 g.drawImage(jalapenoImage, 58 + (i % 9) * 100, 129 + (i / 9) * 120, null);
             } else if (p instanceof CherryBomb) {
