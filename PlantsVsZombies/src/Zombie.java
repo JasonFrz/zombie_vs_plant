@@ -6,7 +6,6 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 public class Zombie {
     Image backgroundImage;
 
@@ -15,17 +14,17 @@ public class Zombie {
 
     private Game game;
 
-    public  int posX = 20;
-    public  int myLane;
+    public int posX = 1000;
+    public int myLane;
     public boolean isMoving = true;
 
-    public Zombie(Game parent,int lane){
+    public Zombie(Game parent, int lane) {
         this.game = parent;
         myLane = lane;
     }
 
-    public void advance(){
-        if(isMoving) {
+    public void advance() {
+        if (isMoving) {
             boolean isCollides = false;
             Collider collided = null;
             for (int i = myLane * 9; i < (myLane + 1) * 9; i++) {
@@ -35,12 +34,12 @@ public class Zombie {
                 }
             }
             if (!isCollides) {
-                if(slowInt>0){
-                    if(slowInt % 2 == 0) {
+                if (slowInt > 0) {
+                    if (slowInt % 2 == 0) {
                         posX--;
                     }
                     slowInt--;
-                }else {
+                } else {
                     posX -= 1;
                 }
             } else {
@@ -48,7 +47,7 @@ public class Zombie {
                 if (collided.assignedPlant.health < 0) {
                     collided.removePlant();
                 }
-            } 
+            }
             if (posX < 0) {
                 isMoving = false;
                 // JOptionPane.showMessageDialog(game,"ZOMBIE MAKAN OTAK MU :P");
@@ -60,36 +59,41 @@ public class Zombie {
     }
 
     int slowInt = 0;
-    public void slow(){
+
+    public void slow() {
         slowInt = 1000;
     }
-    
-    public static Zombie getZombie(String type,Game parent, int lane) {
-        Zombie z = new Zombie(parent,lane);
-        switch(type) {
-            case "NormalZombie" : z = new NormalZombie(parent,lane);
-                                    break;
-            case "ConeHeadZombie" : z = new ConeHeadZombie(parent,lane);
-                                    break;
-            case "BucketHeadZombie" : z = new BucketHeadZombie(parent,lane);
-                                    break;
-            case "FootballZombie" : z = new FootballZombie(parent,lane);
-                                    break;
-            case "Gargantuar" : z = new gargantuar(parent,lane);
-                                    break;
+
+    public static Zombie getZombie(String type, Game parent, int lane) {
+        Zombie z = new Zombie(parent, lane);
+        switch (type) {
+            case "NormalZombie":
+                z = new NormalZombie(parent, lane);
+                break;
+            case "ConeHeadZombie":
+                z = new ConeHeadZombie(parent, lane);
+                break;
+            case "BucketHeadZombie":
+                z = new BucketHeadZombie(parent, lane);
+                break;
+            case "FootballZombie":
+                z = new FootballZombie(parent, lane);
+                break;
+            case "Gargantuar":
+                z = new gargantuar(parent, lane);
+                break;
         }
         return z;
     }
 
     private void showGameOverPanel() {
         backgroundImage = new ImageIcon(this.getClass().getResource("images/GameOver.png")).getImage();
-        
+
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700, 450);
         frame.setLocationRelativeTo(null);
-        
-        
+
         // Buat panel latar belakang dengan gambar atau warna
         JPanel backgroundPanel = new JPanel() {
             @Override
@@ -100,7 +104,6 @@ public class Zombie {
             }
         };
         backgroundPanel.setLayout(null);
-        
 
         // Tambahkan tombol ke panel latar belakang
         JButton exit1Button = new JButton("Exit");
