@@ -36,4 +36,7 @@ public class DataLevel {
         }
                
    }
+
+   // ini adalah komen
+   
 }
