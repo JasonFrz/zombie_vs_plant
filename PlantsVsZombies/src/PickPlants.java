@@ -124,6 +124,21 @@ public class PickPlants extends JPanel {
             add(pickPotato);
         }
 
+        if (PlantVsZombie.showCardCherryBomb) {
+            JButton pickCherryBomb = new JButton();
+            pickCherryBomb.setBounds(349, 169, 66, 95);
+            pickCherryBomb.setIcon(new ImageIcon(this.getClass().getResource("images/cards/card_CherryBomb2.png")));
+            pickCherryBomb.setContentAreaFilled(false);
+            pickCherryBomb.setBorderPainted(false);
+            pickCherryBomb.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    PlantVsZombie.cardCherryBomb = true;
+                }
+            });
+            add(pickCherryBomb);
+        }
+
         JButton letsRock = new JButton();
         letsRock.setBounds(150, 445, 150, 35);
         letsRock.setOpaque(false);

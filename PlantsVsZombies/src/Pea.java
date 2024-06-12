@@ -24,6 +24,8 @@ public class Pea {
                 boolean exit = false;
                 if(z.health < 0){
                     System.out.println("Gacor");
+                    System.out.println(posX + " " + z.posX + " " + myLane + " " + i);
+
                     
                     game.laneZombies.get(myLane).remove(i);
                     Game.setProgress(10);
@@ -33,10 +35,7 @@ public class Pea {
                 if(exit) break;
             }
         }
-        
-        /*if(posX > 2000){
-            game.lanePeas.get(myLane).remove(this);
-        }*/
+    
         posX += 15;
     }
 

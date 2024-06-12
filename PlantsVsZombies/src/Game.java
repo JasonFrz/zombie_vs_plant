@@ -27,6 +27,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
     Image repeaterImage;
     Image potatoMineImage;
     Image jalapenoImage;
+    Image cheriBombImage;
 
     Image winImage;
 
@@ -82,6 +83,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
         repeaterImage = new ImageIcon(this.getClass().getResource("images/plants/repeater.gif")).getImage();
         potatoMineImage = new ImageIcon(this.getClass().getResource("images/plants/PotatoMine1.png")).getImage();
         jalapenoImage = new ImageIcon(this.getClass().getResource("images/plants/jalapeno.gif")).getImage();
+        cheriBombImage = new ImageIcon(this.getClass().getResource("images/plants/CherryBomb.png")).getImage();
 
         normalZombieImage = new ImageIcon(this.getClass().getResource("images/zombies/NormalZombiee.gif")).getImage();
         coneHeadZombieImage = new ImageIcon(this.getClass().getResource("images/zombies/ConeheadZombie.png")).getImage();
@@ -384,6 +386,8 @@ public class Game extends JLayeredPane implements MouseMotionListener {
                 g.drawImage(potatoMineImage, 58 + (i % 9) * 100, 129 + (i / 9) * 120, null);
             } else if(p instanceof jalapeno){
                 g.drawImage(jalapenoImage, 58 + (i % 9) * 100, 129 + (i / 9) * 120, null);
+            } else if (p instanceof CherryBomb) {
+                g.drawImage(cheriBombImage, 48 + (i % 9) * 100, 115 + (i / 9) * 120, null);
             }
         }
     }
@@ -525,6 +529,12 @@ public class Game extends JLayeredPane implements MouseMotionListener {
                 if(getSunScore() >= 125){
                     OnFirst[x + y * 9].setPlant(new jalapeno(Game.this, x, y));
                     setSunScore(getSunScore() - 125);
+                }
+            }
+            if (activePlantingBrush == PlantVsZombie.PlantType.CherryBomb) {
+                if (getSunScore() >= 150) {
+                    OnFirst[x + y * 9].setPlant(new CherryBomb(Game.this, x, y));
+                    setSunScore(getSunScore() - 150);
                 }
             }
             activePlantingBrush = PlantVsZombie.PlantType.None;

@@ -18,7 +18,8 @@ public class PlantVsZombie extends JFrame {
         Wallnut,
         Repeater,
         Jalapeno,
-        PotatoMine
+        PotatoMine,
+        CherryBomb
     }
 
     static boolean cardSunflower = false;
@@ -28,14 +29,19 @@ public class PlantVsZombie extends JFrame {
     static boolean cardRepeater = false;
     static boolean cardJalapeno = false;
     static boolean cardPotato = false;
+    static boolean cardCherryBomb = false;
 
     static boolean showCardSunflower = true;
     static boolean showCardPeashooter = true;
     static boolean showCardWallnut = true;
-    static boolean showCardFreezePeashooter = false;
-    static boolean showCardRepeater = false;
-    static boolean showCardJalapeno = false;
-    static boolean showCardPotato = false;
+    static boolean showCardFreezePeashooter = true;
+    static boolean showCardRepeater = true;
+    static boolean showCardJalapeno = true;
+    static boolean showCardPotato = true;
+    static boolean showCardCherryBomb = true;
+
+    int jarak = 65;
+    int xCard = 110;
     //PlantType activePlantingBrush = PlantType.None;
     
     public PlantVsZombie(){
@@ -53,65 +59,82 @@ public class PlantVsZombie extends JFrame {
         
         if (cardSunflower){
             PlantCard sunflower = new PlantCard(new ImageIcon(this.getClass().getResource("images/cards/card_sunflower.png")).getImage());
-            sunflower.setLocation(110,8);
+            sunflower.setLocation(xCard,8);
             sunflower.setAction((ActionEvent e) -> {
                 onGame.activePlantingBrush = PlantType.Sunflower;
             });
             getLayeredPane().add(sunflower,new Integer(3));
+            xCard += jarak;
         }
         
         if (cardPeashooter){
             PlantCard peashooter = new PlantCard(new ImageIcon(this.getClass().getResource("images/cards/card_Peashooter.png")).getImage());
-            peashooter.setLocation(175,8);
+            peashooter.setLocation(xCard,8);
             peashooter.setAction((ActionEvent e) -> {
                 onGame.activePlantingBrush = PlantType.Peashooter;
             });
             getLayeredPane().add(peashooter,new Integer(3));
+            xCard += jarak;
         }
 
         if (cardWallnut){{
             PlantCard wallnut = new PlantCard(new ImageIcon(this.getClass().getResource("images/cards/card_wallnut.png")).getImage());
-            wallnut.setLocation(240,8);
+            wallnut.setLocation(xCard,8);
             wallnut.setAction((ActionEvent e) -> {
                 onGame.activePlantingBrush = PlantType.Wallnut;
             });
             getLayeredPane().add(wallnut,new Integer(3));
+            xCard += jarak;
         }}
 
         if (cardFreezePeashooter){
             PlantCard freezepeashooter = new PlantCard(new ImageIcon(this.getClass().getResource("images/cards/card_freezepeashooter.png")).getImage());
-            freezepeashooter.setLocation(305,8);
+            freezepeashooter.setLocation(xCard,8);
             freezepeashooter.setAction((ActionEvent e) -> {
                 onGame.activePlantingBrush = PlantType.FreezePeashooter;
             });
             getLayeredPane().add(freezepeashooter,new Integer(3));
+            xCard += jarak;
         }
         
         if (cardRepeater){
             PlantCard repeater = new PlantCard(new ImageIcon(this.getClass().getResource("images/cards/card_repeater.png")).getImage());
-            repeater.setLocation(370,8);
+            repeater.setLocation(xCard,8);
             repeater.setAction((ActionEvent e) -> {
                 onGame.activePlantingBrush = PlantType.Repeater;
             });
             getLayeredPane().add(repeater,new Integer(3));
+            xCard += jarak;
         }
 
         if (cardJalapeno){
             PlantCard jalapeno = new PlantCard(new ImageIcon(this.getClass().getResource("images/cards/card_jalapeno.png")).getImage());
-            jalapeno.setLocation(433,8);
+            jalapeno.setLocation(xCard,8);
             jalapeno.setAction((ActionEvent e) -> {
                 onGame.activePlantingBrush = PlantType.Jalapeno;
             });
             getLayeredPane().add(jalapeno,new Integer(3));
+            xCard += jarak;
         }
 
         if (cardPotato){
             PlantCard potatomine = new PlantCard(new ImageIcon(this.getClass().getResource("images/cards/card_potatomine.png")).getImage());
-            potatomine.setLocation(498,8);
+            potatomine.setLocation(xCard,8);
             potatomine.setAction((ActionEvent e) -> {
                 onGame.activePlantingBrush = PlantType.PotatoMine;
             });
             getLayeredPane().add(potatomine,new Integer(3));
+            xCard += jarak;
+        }
+
+        if (cardCherryBomb){
+            PlantCard cherrybomb = new PlantCard(new ImageIcon(this.getClass().getResource("images/cards/card_cherrybomb.png")).getImage());
+            cherrybomb.setLocation(xCard,8);
+            cherrybomb.setAction((ActionEvent e) -> {
+                onGame.activePlantingBrush = PlantType.CherryBomb;
+            });
+            getLayeredPane().add(cherrybomb,new Integer(3));
+            xCard += jarak;
         }
         
         getLayeredPane().add(sun,new Integer(2));
@@ -143,12 +166,4 @@ public class PlantVsZombie extends JFrame {
         gameMenu = new PlantVsZombie(true);   
     }
 
-    // public static void pickPlant(){
-    //     gameMenu.dispose(); // Menutup jendela MainMenu
-    //     gameMenu = new PlantVsZombie(); // Membuat instance baru dari PlantVsZombie
-    //     PickPlants pickPlants = new PickPlants(); // Membuat instance PickPlants
-    //     gameMenu.setContentPane(pickPlants); // Mengatur konten jendela ke PickPlants
-    //     gameMenu.validate(); // Melakukan validasi jendela untuk memastikan layout terupdate
-    //     gameMenu.repaint(); // Melakukan repaint jendela untuk menampilkan perubahan
-    // }
 }
