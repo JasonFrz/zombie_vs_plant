@@ -202,6 +202,17 @@ public class Game extends JLayeredPane implements MouseMotionListener {
         }
     }
 
+    public void clearColumnOfZombies(int column) {
+        for (ArrayList<Zombie> lane : laneZombies) {
+            for (Zombie zombie : new ArrayList<>(lane)) {
+                if (zombie.posX == column * 100) {
+                    lane.remove(zombie);
+                }
+            }
+        }
+    }
+    
+
     public void clearLaneOfZombies(int lane) {
         laneZombies.get(lane).clear();
     }

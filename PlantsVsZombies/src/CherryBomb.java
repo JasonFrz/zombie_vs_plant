@@ -13,27 +13,13 @@ public class CherryBomb extends Plant {
     }
 
     private void explode() {
-        // int[][] area = {
-        //     {0, 0}, {0, -1}, {0, 1}, {-100, 0}, {100, 0},
-        //     {-100, -1}, {-100, 1}, {100, -1}, {100, 1}
-        // };
-
-        // System.out.println("CherryBomb exploding at (" + x + ", " + y + ")");
-
-        // // int posX = Zombie.getPosX();
-        // for (int[] areaAtk : area) {
-        //     int checkX = x + areaAtk[0];
-        //     int checkY = y + areaAtk[1];
-            
-        //     if (isValidPosition(checkX, checkY)) {
-        //         game.killZombieAt(checkX, checkY);
-        //     }
-        // }
-
+        // Hapus zombie di sekitar CherryBomb dalam baris (y) dan kolom (x)
+        for (int i = 0; i < 5; i++) {
+            game.clearLaneOfZombies(i); // Hapus zombie dalam baris (y)
+            game.clearColumnOfZombies(x); // Hapus zombie dalam kolom (x)
+        }
+        
+        // Hapus CherryBomb setelah meledak
         game.removePlant(this);
     }
-
-    // private boolean isValidPosition(int x, int y) {
-    //     return x >= 0 && x < 9 && y >= 0 && y < 5;
-    // }
 }
