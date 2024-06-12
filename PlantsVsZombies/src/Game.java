@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.text.html.HTMLDocument.Iterator;
 
 // import javafx.scene.chart.PieChart.Data;
 
@@ -162,6 +163,40 @@ public class Game extends JLayeredPane implements MouseMotionListener {
         add(menuButton, new Integer(1));
     }
 
+    // untuk melakukan pengecekan apakah terdapat zombie pada posisi tertentu
+    public boolean isZombieAt(int x, int y) {
+        for (ArrayList<Zombie> lane : laneZombies) {
+            for (Zombie z : lane) {
+                if (z.posX == x && z.myLane == y) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // untuk membunuh zombie pada posisi tertentu
+    public void killZombieAt(int x, int y) {
+        for (ArrayList<Zombie> lane : laneZombies) {
+            for (Zombie z : lane) {
+                if (z.posX == x && z.myLane == y) {
+                    lane.remove(z);
+                    return;
+                }
+            }
+        }
+    }
+
+    // untuk meremove plant potatomine
+    public void removePlant(Plant plant) {
+        for (int i = 0; i < 45; i++) {
+            if (OnFirst[i].assignedPlant == plant) {
+                OnFirst[i].removePlant();
+                return;
+            }
+        }
+    }
+
     private void showOptionsMenu() {
         pauseGame();
         optionsMenu.setVisible(true);
@@ -195,6 +230,9 @@ public class Game extends JLayeredPane implements MouseMotionListener {
             }
             else if (OnFirst[i].assignedPlant instanceof FreezePeashooter) {
                 ((FreezePeashooter) OnFirst[i].assignedPlant).pause();
+            } 
+            else if (OnFirst[i].assignedPlant instanceof Potatomine) {
+                ((Potatomine) OnFirst[i].assignedPlant).pause();
             }
         }
 
@@ -229,6 +267,9 @@ public class Game extends JLayeredPane implements MouseMotionListener {
             }
             else if (OnFirst[i].assignedPlant instanceof FreezePeashooter) {
                 ((FreezePeashooter) OnFirst[i].assignedPlant).resume();
+            }
+            else if (OnFirst[i].assignedPlant instanceof Potatomine) {
+                ((Potatomine) OnFirst[i].assignedPlant).resume();
             }
         }
     }
@@ -333,10 +374,9 @@ public class Game extends JLayeredPane implements MouseMotionListener {
                 g.drawImage(wallnutImage, 50 + (i % 9) * 100, 120 + (i / 9) * 120, null);
             } else if (p instanceof repeater) {
                 g.drawImage(repeaterImage, 33 + (i % 9) * 100, 100 + (i / 9) * 120, null);
-            } 
-            // else if(p instanceof Potatomine){
-            //     g.drawImage(potatoMineImage, 58 + (i % 9) * 100, 129 + (i / 9) * 120, null);
-            // }
+            } else if(p instanceof Potatomine){
+                g.drawImage(potatoMineImage, 58 + (i % 9) * 100, 129 + (i / 9) * 120, null);
+            }
         }
     }
 
@@ -466,12 +506,13 @@ public class Game extends JLayeredPane implements MouseMotionListener {
                     setSunScore(getSunScore()-200);
                 }
             }
-            // if(activePlantingBrush == PlantVsZombie.PlantType.PotatoMine){
-            //     if(getSunScore() >= 25){
-            //         OnFirst[x + y * 9].setPlant(new Potatomine(Game.this, x, y));
-            //         setSunScore(getSunScore() - 25);
-            //     }
-            // }
+
+            if(activePlantingBrush == PlantVsZombie.PlantType.PotatoMine){
+                if(getSunScore() >= 25){
+                    OnFirst[x + y * 9].setPlant(new Potatomine(Game.this, x, y));
+                    setSunScore(getSunScore() - 25);
+                }
+            }
             activePlantingBrush = PlantVsZombie.PlantType.None;
         }
     }
