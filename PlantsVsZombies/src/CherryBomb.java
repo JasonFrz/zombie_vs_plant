@@ -13,13 +13,13 @@ public class CherryBomb extends Plant {
     }
 
     private void explode() {
-        // Hapus zombie di sekitar CherryBomb dalam baris (y) dan kolom (x)
+        
         for (int i = 0; i < 5; i++) {
-            game.clearLaneOfZombies(i); // Hapus zombie dalam baris (y)
-            game.clearColumnOfZombies(x); // Hapus zombie dalam kolom (x)
+            game.clearLaneOfZombies(i); 
+            game.clearColumnOfZombies(x); 
         }
         
-        // Hapus CherryBomb setelah meledak
+        
         game.removePlant(this);
     }
 }
