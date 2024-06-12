@@ -1,8 +1,6 @@
 import javax.swing.*;
 import javax.swing.text.html.HTMLDocument.Iterator;
 
-// import javafx.scene.chart.PieChart.Data;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -80,7 +78,8 @@ public class Game extends JLayeredPane implements MouseMotionListener {
         freezePeaImage = new ImageIcon(this.getClass().getResource("images/freezepea.png")).getImage();
         wallnutImage = new ImageIcon(this.getClass().getResource("images/plants/wallnut.gif")).getImage();
         repeaterImage = new ImageIcon(this.getClass().getResource("images/plants/repeater.gif")).getImage();
-        potatoMineImage = new ImageIcon(this.getClass().getResource("images/plants/PotatoMine1.png")).getImage();
+        // potatoMineImage = new
+        // ImageIcon(this.getClass().getResource("images/plants/PotatoMine1.png")).getImage();
         jalapenoImage = new ImageIcon(this.getClass().getResource("images/plants/jalapeno.gif")).getImage();
         cheriBombImage = new ImageIcon(this.getClass().getResource("images/plants/CherryBomb.png")).getImage();
 
@@ -211,7 +210,6 @@ public class Game extends JLayeredPane implements MouseMotionListener {
             }
         }
     }
-    
 
     public void clearLaneOfZombies(int lane) {
         laneZombies.get(lane).clear();
@@ -595,6 +593,11 @@ public class Game extends JLayeredPane implements MouseMotionListener {
             }
             progress = 0;
         }
+    }
+
+    public void updatePlantImage(Plant plant) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updatePlantImage'");
     }
 
 }
