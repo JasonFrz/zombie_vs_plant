@@ -130,4 +130,9 @@ public class Zombie {
         frame.setVisible(true);
     }
 
+    public int getX() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getX'");
+    }
+
 }

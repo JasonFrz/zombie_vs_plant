@@ -1,4 +1,9 @@
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
 public class Potatomine extends Plant {
@@ -26,16 +31,13 @@ public class Potatomine extends Plant {
             System.out.println("Potatomine at (" + getX() + ", " + getY() + ") growth stage " + growthStage);
 
             // Update image based on growth stage
-            String imagePath;
+            String imagePath = null;
             switch (growthStage) {
                 case 1:
                     imagePath = "images/plants/PotatoMine1.png";
                     break;
                 case 2:
                     imagePath = "images/plants/PotatoMine2.png";
-                    break;
-                default:
-                    imagePath = "images/plants/PotatoMine1.png";
                     break;
             }
 
@@ -53,7 +55,7 @@ public class Potatomine extends Plant {
     }
 
     private void startCheckZombies() {
-        explosionTimer = new Timer(1000, (ActionEvent e) -> {
+        explosionTimer = new Timer(2000, (ActionEvent e) -> {
             if (checkForZombie()) {
                 explode();
             }
@@ -63,17 +65,26 @@ public class Potatomine extends Plant {
     }
 
     private boolean checkForZombie() {
-        boolean isZombie = game.isZombieAt(getX(), getY());
-        return isZombie;
+        return getGame().isZombieAt(getX(), getY());
     }
 
     private void explode() {
-        // remove all zombies in the lane
-        game.clearLaneOfZombies(y);
+        // Remove all zombies in the lane
+        getGame().clearLaneOfZombies(getY());
         // Remove this potatomine from the game
-        game.removePlant(this);
+        getGame().removePlant(this);
         System.out.println("Potatomine at (" + getX() + ", " + getY() + ") exploded!");
         // Stop the explosion timer
         explosionTimer.stop();
+    }
+
+    public void updateImage(String path) {
+        try {
+            // Load the image from the given path and set it to the plant
+            BufferedImage newImage = ImageIO.read(new File(path));
+            this.setImage(newImage);
+        } catch (IOException e) {
+            System.err.println("Failed to load image: " + path);
+        }
     }
 }
