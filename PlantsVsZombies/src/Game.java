@@ -72,7 +72,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
         backgroundImg = new ImageIcon(this.getClass().getResource("images/mainBG.png")).getImage();
 
         peashooterImage = new ImageIcon(this.getClass().getResource("images/plants/peashooter1.gif")).getImage();
-        freezePeashooterImage = new ImageIcon(this.getClass().getResource("images/plants/SnowPea.png")).getImage();
+        freezePeashooterImage = new ImageIcon(this.getClass().getResource("images/plants/freezepeashooter.gif")).getImage();
         sunflowerImage = new ImageIcon(this.getClass().getResource("images/plants/sunflower.gif")).getImage();
         peaImage = new ImageIcon(this.getClass().getResource("images/pea.png")).getImage();
         freezePeaImage = new ImageIcon(this.getClass().getResource("images/freezepea.png")).getImage();
@@ -372,7 +372,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
                 if (p instanceof Peashooter) {
                     g.drawImage(peashooterImage, 60 + (i % 9) * 100, 129 + (i / 9) * 120, null);
                 } else if (p instanceof FreezePeashooter) {
-                    g.drawImage(freezePeashooterImage, 48 + (i % 9) * 100, 110 + (i / 9) * 120, null);
+                    g.drawImage(freezePeashooterImage, 55 + (i % 9) * 100, 140 + (i / 9) * 120, null);
                 } else if (p instanceof Sunflower) {
                     g.drawImage(sunflowerImage, 60 + (i % 9) * 100, 129 + (i / 9) * 120, null);
                 } else if (p instanceof Wallnut) {
