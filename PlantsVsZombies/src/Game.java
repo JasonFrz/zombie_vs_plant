@@ -78,7 +78,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
         freezePeaImage = new ImageIcon(this.getClass().getResource("images/freezepea.png")).getImage();
         wallnutImage = new ImageIcon(this.getClass().getResource("images/plants/wallnut.gif")).getImage();
         repeaterImage = new ImageIcon(this.getClass().getResource("images/plants/repeater.gif")).getImage();
-        potatoMineImage = new ImageIcon(this.getClass().getResource("images/plants/PotatoMine1.png")).getImage();
+        // potatoMineImage = new ImageIcon(this.getClass().getResource("images/plants/PotatoMine1.png")).getImage();
         jalapenoImage = new ImageIcon(this.getClass().getResource("images/plants/jalapeno.gif")).getImage();
         cheriBombImage = new ImageIcon(this.getClass().getResource("images/plants/CherryBomb.png")).getImage();
 
@@ -380,7 +380,7 @@ public class Game extends JLayeredPane implements MouseMotionListener {
                 } else if (p instanceof repeater) {
                     g.drawImage(repeaterImage, 33 + (i % 9) * 100, 100 + (i / 9) * 120, null);
                 } else if (p instanceof Potatomine) {
-                    g.drawImage(potatoMineImage, 45 + (i % 9) * 100, 129 + (i / 9) * 120, null);
+                    g.drawImage(Potatomine.imagePath, 45 + (i % 9) * 100, 129 + (i / 9) * 120, null);
                 } else if (p instanceof jalapeno) {
                     g.drawImage(jalapenoImage, 58 + (i % 9) * 100, 129 + (i / 9) * 120, null);
                 } else if (p instanceof CherryBomb) {

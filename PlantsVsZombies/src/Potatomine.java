@@ -11,22 +11,28 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
+import javafx.scene.shape.Rectangle;
+
 public class Potatomine extends Plant {
     private Timer growthTimer;
     private Timer explosionTimer;
     private int growthStage;
     private BufferedImage plantImage;
-    private static final int GROWTH_DURATION = 6000;
+    private static final int GROWTH_GROW = 60000;
     private static final int TOTAL_STAGES = 3;
+    static Image imagePath;
 
     public Potatomine(Game parent, int x, int y) {
         super(parent, x, y);
-        setHealth(1);
+        setHealth(20);
         growthStage = 0;
 
-        growthTimer = new Timer(GROWTH_DURATION / TOTAL_STAGES, (ActionEvent e) -> {
+        grow();
+
+        growthTimer = new Timer(GROWTH_GROW / TOTAL_STAGES, (ActionEvent e) -> {
             grow();
         });
+        
         growthTimer.setRepeats(true);
         growthTimer.start();
     }
@@ -37,7 +43,7 @@ public class Potatomine extends Plant {
             System.out.println("Potatomine at (" + getX() + ", " + getY() + ") growth stage " + growthStage);
 
             // Update image based on growth stage
-            Image imagePath;
+            
             switch (growthStage) {
                 case 1:
                     imagePath = new ImageIcon(this.getClass().getResource("images/plants/PotatoMine1.png")).getImage();
@@ -53,7 +59,7 @@ public class Potatomine extends Plant {
     }
 
     private void startCheckZombies() {
-        explosionTimer = new Timer(2000, (ActionEvent e) -> {
+        explosionTimer = new Timer(1000, (ActionEvent e) -> {
             if (checkForZombie()) {
                 explode();
             }
@@ -67,21 +73,25 @@ public class Potatomine extends Plant {
     }
 
     private void explode() {
-        // List<Zombie> lane = getGame().laneZombies.get(getY());
-        // Iterator<Zombie> it = lane.iterator();
-        // while (it.hasNext()) {
-        // Zombie zombie = it.next();
-        // System.out.println("Checking zombie at (" + zombie.posX + ", " + getY() +
-        // ")");
-        // if (zombie.posX == getX()) {
-        // System.out.println("Removing zombie at (" + zombie.posX + ", " + getY() +
-        // ")");
-        // // Remove the zombie using the iterator
-        // it.remove();
-        // getGame().killZombieAt(zombie.posX, getY());
-        // // Remove all zombies in the lane
-        // game.clearLaneOfZombies(y);
-        // }
+        // Rectangle pRect = new Rectangle(getX(),130+y*120,28,28);
+        // for (int i = 0; i < game.laneZombies.get(y).size(); i++) {
+        //     Zombie z = game.laneZombies.get(y).get(i);
+        //     Rectangle zRect = new Rectangle(z.posX,109 + y*120,400,120);
+        //     if(pRect.intersects(zRect)){
+        //         z.health -= 143;
+        //         boolean exit = false;
+        //         if(z.health < 0){
+        //             System.out.println("Gacor");
+        //             System.out.println(posX + " " + z.posX + " " + myLane + " " + i);
+
+                    
+        //             game.laneZombies.get(myLane).remove(i);
+        //             Game.setProgress(10);
+        //             exit = true;
+        //         }
+        //         game.lanePeas.get(myLane).remove(this);
+        //         if(exit) break;
+        //     }
         // }
 
         if (checkForZombie()) {
