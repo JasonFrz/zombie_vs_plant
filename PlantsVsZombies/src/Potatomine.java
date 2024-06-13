@@ -67,19 +67,25 @@ public class Potatomine extends Plant {
     }
 
     private void explode() {
-        List<Zombie> lane = getGame().laneZombies.get(getY());
-        Iterator<Zombie> it = lane.iterator();
-        while (it.hasNext()) {
-            Zombie zombie = it.next();
-            System.out.println("Checking zombie at (" + zombie.posX + ", " + getY() + ")");
-            if (zombie.posX == getX()) {
-                System.out.println("Removing zombie at (" + zombie.posX + ", " + getY() + ")");
-                // Remove the zombie using the iterator
-                it.remove();
-                getGame().killZombieAt(zombie.posX, getY());
-                // Remove all zombies in the lane
-                game.clearLaneOfZombies(y);
-            }
+        // List<Zombie> lane = getGame().laneZombies.get(getY());
+        // Iterator<Zombie> it = lane.iterator();
+        // while (it.hasNext()) {
+        // Zombie zombie = it.next();
+        // System.out.println("Checking zombie at (" + zombie.posX + ", " + getY() +
+        // ")");
+        // if (zombie.posX == getX()) {
+        // System.out.println("Removing zombie at (" + zombie.posX + ", " + getY() +
+        // ")");
+        // // Remove the zombie using the iterator
+        // it.remove();
+        // getGame().killZombieAt(zombie.posX, getY());
+        // // Remove all zombies in the lane
+        // game.clearLaneOfZombies(y);
+        // }
+        // }
+
+        if (checkForZombie()) {
+            getGame().clearLaneOfZombies(getY());
         }
 
         // Remove this potatomine from the game
