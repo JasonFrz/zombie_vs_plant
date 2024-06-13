@@ -34,11 +34,11 @@ public class PlantVsZombie extends JFrame {
     static boolean showCardSunflower = true;
     static boolean showCardPeashooter = true;
     static boolean showCardWallnut = true;
-    static boolean showCardFreezePeashooter = true;
-    static boolean showCardRepeater = true;
-    static boolean showCardJalapeno = true;
-    static boolean showCardPotato = true;
-    static boolean showCardCherryBomb = true;
+    static boolean showCardFreezePeashooter = false;
+    static boolean showCardRepeater = false;
+    static boolean showCardJalapeno = false;
+    static boolean showCardPotato = false;
+    static boolean showCardCherryBomb = false;
 
     int jarak = 65;
     int xCard = 110;
