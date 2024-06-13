@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.text.html.HTMLDocument.Iterator;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -180,12 +180,13 @@ public class Game extends JLayeredPane implements MouseMotionListener {
 
     // untuk membunuh zombie pada posisi tertentu
     public void killZombieAt(int x, int y) {
-        for (ArrayList<Zombie> lane : laneZombies) {
-            for (Zombie z : lane) {
-                if (z.posX == x && z.myLane == y) {
-                    lane.remove(z);
-                    return;
-                }
+        ArrayList<Zombie> lane = laneZombies.get(y);
+        Iterator<Zombie> it = lane.iterator();
+        while (it.hasNext()) {
+            Zombie z = it.next();
+            if (z.posX == x) {
+                it.remove();
+                return;
             }
         }
     }
